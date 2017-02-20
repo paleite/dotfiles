@@ -19,7 +19,11 @@
 # Chrome Canary
 # ImageOptim
 # JPEGmini
-#
+# Spectacle
+# Flux
+# Spotify Notifications
+# Dropbox
+# Google Drive
 
 ################################################################################
 # Defaults                                                                     #
