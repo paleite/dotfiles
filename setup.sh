@@ -3,13 +3,28 @@
 ################################################################################
 
 # Homebrew
+sh brew.sh
+
 # Node
-# N
-# Yarn
+n latest
+
+# NPM global packages
+sh npm.sh
+
+# Dock spacer-tiles x 5
+defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
+defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
+defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
+defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
+defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
+killall Dock
+
+# Mac App Store
+sh mas.sh
+
 # Sketch
-# Nativefier, make apps
-# dock-spacers
-# Spotify
+sh sketch.sh
+
 # SublimeText
 # Sourcetree
 # Skype
@@ -21,9 +36,8 @@
 # JPEGmini
 # Spectacle
 # Flux
-# Spotify Notifications
 # Dropbox
-# Google Drive
+# Google Backup & Sync
 
 ################################################################################
 # Defaults                                                                     #

@@ -1,0 +1,22 @@
+yarn global add\
+  babel-cli\
+  eslint\
+  eslint-config-standard\
+  eslint-plugin-html\
+  eslint-plugin-import\
+  eslint-plugin-node\
+  eslint-plugin-promise\
+  eslint-plugin-standard\
+  imageoptim-cli\
+  jsdoc\
+  nativefier\
+  npm\
+  npm-check-updates\
+  pm2\
+  prettier\
+  sass-lint\
+  svgo\
+  vue-cli\
+  webpack\
+  webpack-bundle-analyzer\
+  webpack-dev-server
