@@ -1,0 +1,6 @@
+MAILTO=patrick.eriksson.se@gmail.com
+
+*/5 9-17 * * 1-5 ~/crontab.sh 5minwork
+2 13 * * * ~/crontab.sh daily
+7 13 * * 2 ~/crontab.sh weekly
+2 13 1 * * ~/crontab.sh monthly

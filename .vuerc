@@ -1,0 +1,20 @@
+{
+  "packageManager": "yarn",
+  "presets": {
+    "standard-pwa": {
+      "useConfigFiles": true,
+      "plugins": {
+        "@vue/cli-plugin-babel": {},
+        "@vue/cli-plugin-pwa": {},
+        "@vue/cli-plugin-eslint": {
+          "config": "prettier",
+          "lintOn": []
+        }
+      },
+      "router": true,
+      "vuex": true,
+      "cssPreprocessor": "sass"
+    }
+  },
+  "useTaobaoRegistry": false
+}

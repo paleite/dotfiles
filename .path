@@ -1,0 +1,7 @@
+export NODE_PATH=/usr/local/lib/node_modules
+export GOPATH=${HOME}/go-get
+
+export PATH=/usr/local/bin:${HOME}/.composer/vendor/bin:/usr/local/php5/bin:${HOME}/go/bin:$PATH
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+
+export PATH="${HOME}/.rbenv/shims:${PATH}"

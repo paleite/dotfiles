@@ -1,0 +1,25 @@
+# Get the git branch of the current folder (useful in PS1)
+function parse_git_branch() {
+	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+# Kill the process that listens on specific port
+function killport() {
+  lsof -i TCP:$1 | grep LISTEN | awk '{print $2}' | xargs kill -9;
+}
+
+function _yarnhook() {
+  YARN_FILES=(yarn.lock package.json package-lock.json shrinkwrap.yaml)
+  # HAS_FOUND=0
+  for i in ${YARN_FILES[*]}; do
+    if [[ -s $i ]]; then
+      # HAS_FOUND=1;
+      yarn install;
+      break;
+    fi
+  done
+
+  # if [[ $HAS_FOUND == 0 ]]; then
+  #   echo "Not a yarn project";
+  # fi
+}
