@@ -1,0 +1,34 @@
+# Don't stop after errors
+--ignore-errors
+
+# Keep records of what's been downloaded already
+--download-archive archive.txt
+
+# Write JSON to display information about the video in the frontend
+--write-info-json
+
+# Use the thumbnail as a poster for the video
+--write-thumbnail
+
+# Write subs
+--write-sub
+
+# Convert the subs to a common format (maybe overkill)
+--convert-subs srt
+
+# Use a format that's good enough to be viewed on a mobile device, but doesn't kill mobile data
+--format 'best,bestvideo+bestaudio'
+
+# Write a description of the video
+--write-description
+
+# # Use only video ID in file name, to map it in the frontend
+# --id
+
+# Do not mark videos watched (YouTube only)
+--no-mark-watched
+
+# TODO:
+# '--embed-thumbnail',
+# '--embed-subs',
+# '--write-sub',
