@@ -5,18 +5,19 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-readonly OS=$(uname)
-readonly TMPDIR=$(dirname $(mktemp -u)) # Portable TMPDIR: https://unix.stackexchange.com/a/174818
-cd "$DIR"
+shopt -s expand_aliases
+alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-# Create .extra-file
-[ -e "${HOME}/.extra" ] || touch "${HOME}/.extra"
+# readonly DIR="$(cd "$(/usr/bin/dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+readonly DIR="${HOME}/dotfiles/"
+.f status
+readonly OS=$(/usr/bin/uname)
+readonly TMPDIR=$(/usr/bin/dirname "$(/usr/bin/mktemp -u)") # Portable TMPDIR: https://unix.stackexchange.com/a/174818
+cd "$DIR"
 
 ################################################################################
 # macOS
 # TODO:
-# - Check for macOS first, otherwise the tests will fail
 # - mathias bynens macos dotfiles/script
 # - brewfile / mas
 # - keychain
@@ -36,8 +37,9 @@ then
   # Change default settings
   ./macos.sh
 
-  # Install software
+  # Install software (e.g. git, make, etc.)
   ./xcode-install.sh
+
   # Note: This is only to install homebrew. NOT to install its Brewfile
   ./brew.sh
 fi
@@ -85,8 +87,8 @@ echo "Installing misc software…"
 
 if [ "${OS}" == "Darwin" ]
 then
-  echo "  Installing PHP 7.3"
-  curl -s https://php-osx.liip.ch/install.sh | bash -s force 7.3
+  echo "Installing PHP 7.3"
+  /usr/bin/curl -s https://php-osx.liip.ch/install.sh | /bin/bash -s force 7.3
 fi
 
 
@@ -99,6 +101,8 @@ echo "Installing cronjobs…"
 cat ./crontab
 crontab ./crontab
 
+# Create .extra-file
+[ -e "${HOME}/.extra" ] || touch "${HOME}/.extra"
 
 echo "Restarting Dock…"
 
