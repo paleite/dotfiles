@@ -1,0 +1,25 @@
+{
+  "overrides": [
+    {
+      "files": [".*rc"],
+      "options": {
+        "parser": "yaml"
+      }
+    },
+    {
+      "files": [
+        ".babelrc",
+        ".eslintrc",
+        ".huskyrc",
+        ".lintstagedrc",
+        ".postcssrc",
+        ".posthtmlrc",
+        ".prettierrc",
+        ".sassrc"
+      ],
+      "options": {
+        "parser": "json"
+      }
+    }
+  ]
+}
