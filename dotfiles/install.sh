@@ -1,22 +1,20 @@
 #!/usr/bin/env bash
 
-set -e
-set -x
+[[ "${DEBUG}" == 'true' ]] && set -o xtrace
+set -o errexit
+set -o pipefail
+set -o nounset
+
+readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+readonly OS=$(uname)
+readonly TMPDIR=$(dirname $(mktemp -u)) # Portable TMPDIR: https://unix.stackexchange.com/a/174818
+cd "$DIR"
 
 echo "Running install.sh"
-
-OS=$(uname)
-# Portable TMPDIR
-# https://unix.stackexchange.com/a/174818
-TMPDIR=$(dirname $(mktemp -u))
-
-# Install Xcode Command Line Tools (adds git, make, etc. needed for homebrew)
-echo "Installing Xcode Command Line Tools…"
-sudo softwareupdate -i -a
-xcode-select --install
+echo ""
 
 # Add .extra file if it doesn't exist
-[ -e "${HOME}/.extra" ] || echo "'${HOME}/.extra' doesn't exist" # touch "${HOME}/.extra"
+[ -e "${HOME}/.extra" ] || touch "${HOME}/.extra"
 
 ################################################################################
 # macOS
@@ -36,7 +34,8 @@ xcode-select --install
 #   - dark mode
 ################################################################################
 
-if [ "${OS}" == "Darwin" ]; then
+if [ "${OS}" == "Darwin" ]
+then
   # Change default settings
   echo "Changing default settings…"
   sh ./.macos
@@ -45,12 +44,6 @@ if [ "${OS}" == "Darwin" ]; then
   echo "Installing software…"
   # Note: This is only to install homebrew. NOT to install its Brewfile
   sh ./.brew
-else
-  # curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash
-
-  # # Install n
-  # # NB: Should ideally be installed from a package manager like brew
-  # yarn global add n
 fi
 
 ################################################################################
@@ -65,25 +58,62 @@ fi
 # - which apps are installed?
 ################################################################################
 
-if [ "${OS}" == "Darwin" ]; then
+if [ "${OS}" == "Darwin" ]
+then
   # Install Homebrew kegs and Mac App Store apps
   echo "Installing Homebrew kegs and Mac App Store apps…"
-  # brew bundle
+  brew bundle
 
   # # `svgo` currently requires `node`, but we install it through `n`, so it's not needed anymore
-  # brew uninstall --ignore-dependencies node
+  brew uninstall --ignore-dependencies node
+
+  echo ""
 fi
+
+# Install VSCode extensions
+./import-vscode-extensions.sh
 
 # Configure yarn
 echo "Configuring yarn…"
-# # Save exact version when adding
-# yarn config set save-exact true
-# # Mirror packages offline
-# yarn config set yarn-offline-mirror "${TMPDIR}/npm-packages-offline-mirror"
-# yarn config set yarn-offline-mirror-pruning true
+# TODO: Move to function
+# Save exact version when adding
+yarn config set save-exact true
+# Mirror packages offline
+yarn config set yarn-offline-mirror "${TMPDIR}/npm-packages-offline-mirror"
+yarn config set yarn-offline-mirror-pruning true
+
+echo ""
 
 ################################################################################
 # Misc software
 ################################################################################
 
-# - php? https://php-osx.liip.ch
+echo "Installing misc software…"
+
+if [ "${OS}" == "Darwin" ]
+then
+  echo "  Installing PHP 7.3"
+  curl -s https://php-osx.liip.ch/install.sh | bash -s force 7.3
+fi
+
+echo ""
+
+################################################################################
+# Cronjobs
+################################################################################
+
+echo "Installing cronjobs…"
+
+cat ./crontab
+crontab ./crontab
+
+echo ""
+
+echo "Restarting Dock…"
+
+if [ "${OS}" == "Darwin" ]
+then
+  killall Dock
+fi
+
+echo ""
