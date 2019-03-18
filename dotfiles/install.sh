@@ -10,10 +10,7 @@ readonly OS=$(uname)
 readonly TMPDIR=$(dirname $(mktemp -u)) # Portable TMPDIR: https://unix.stackexchange.com/a/174818
 cd "$DIR"
 
-echo "Running install.sh"
-echo ""
-
-# Add .extra file if it doesn't exist
+# Create .extra-file
 [ -e "${HOME}/.extra" ] || touch "${HOME}/.extra"
 
 ################################################################################
@@ -37,13 +34,12 @@ echo ""
 if [ "${OS}" == "Darwin" ]
 then
   # Change default settings
-  echo "Changing default settings…"
-  sh ./.macos
+  ./macos.sh
 
   # Install software
-  echo "Installing software…"
+  ./xcode-install.sh
   # Note: This is only to install homebrew. NOT to install its Brewfile
-  sh ./.brew
+  ./brew.sh
 fi
 
 ################################################################################
@@ -66,8 +62,6 @@ then
 
   # # `svgo` currently requires `node`, but we install it through `n`, so it's not needed anymore
   brew uninstall --ignore-dependencies node
-
-  echo ""
 fi
 
 # Install VSCode extensions
@@ -82,7 +76,6 @@ yarn config set save-exact true
 yarn config set yarn-offline-mirror "${TMPDIR}/npm-packages-offline-mirror"
 yarn config set yarn-offline-mirror-pruning true
 
-echo ""
 
 ################################################################################
 # Misc software
@@ -96,7 +89,6 @@ then
   curl -s https://php-osx.liip.ch/install.sh | bash -s force 7.3
 fi
 
-echo ""
 
 ################################################################################
 # Cronjobs
@@ -107,7 +99,6 @@ echo "Installing cronjobs…"
 cat ./crontab
 crontab ./crontab
 
-echo ""
 
 echo "Restarting Dock…"
 
@@ -116,4 +107,3 @@ then
   killall Dock
 fi
 
-echo ""

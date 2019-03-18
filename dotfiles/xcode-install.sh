@@ -1,23 +1,12 @@
 #!/usr/bin/env bash
 
-# Inspirations:
-# https://raw.githubusercontent.com/mathiasbynens/dotfiles/master/.macos
-# https://raw.githubusercontent.com/alrra/dotfiles/master/src/os/install/macos/xcode.sh
-
-echo "  Running .macos"
-
-# Close any open System Preferences panes, to prevent them from overriding
-# settings we’re about to change
-osascript -e 'tell application "System Preferences" to quit'
-
-# Ask for the administrator password upfront
-sudo -v
-
-# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+[[ "${DEBUG}" == 'true' ]] && set -o xtrace
+set -o errexit
+set -o pipefail
+set -o nounset
 
 # Install Xcode Command Line Tools (adds git, make, etc. needed for homebrew)
-echo "  Installing Xcode Command Line Tools…"
+echo "Installing Xcode Command Line Tools (xcode-select)…"
 are_xcode_command_line_tools_installed() {
     xcode-select --print-path &> /dev/null
 }
@@ -60,5 +49,3 @@ install_xcode_command_line_tools() {
 }
 
 are_xcode_command_line_tools_installed || install_xcode_command_line_tools
-
-echo ""
