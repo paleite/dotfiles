@@ -13,14 +13,3 @@ export GOPATH="${HOME}/go"
 # export GOROOT="$(brew --prefix golang)/libexec" # Slow
 load_goroot ${0:a:h}
 # export GOROOT="/usr/local/opt/go/libexec" # Fast
-
-# Composer
-export PATH="${PATH}:${HOME}/.composer/vendor/bin"
-
-# PHP 5
-export PATH="${PATH}:/usr/local/php5/bin"
-
-# Go
-export PATH="${PATH}:${GOPATH}/bin"
-export PATH="${PATH}:${GOROOT}/bin"
-export PATH="${PATH}:${HOME}/.rbenv/shims"
