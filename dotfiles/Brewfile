@@ -8,6 +8,7 @@ tap "homebrew/science"
 tap "homebrew/services"
 tap "jonof/kenutils"
 tap "potatolabs/git-redate"
+tap "sambadevi/powerlevel9k"
 # Tool for reverse engineering 3rd party, closed, binary Android apps
 brew "apktool"
 # MPEG-4 command-line tool
@@ -82,6 +83,8 @@ brew "rbenv"
 brew "redis", restart_service: true
 # Perl-powered file rename script with many helpful built-ins
 brew "rename"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
 # SOund eXchange: universal sound sample translator
 brew "sox"
 # Granddaddy of HTML tools, with support for modern standards
@@ -104,8 +107,14 @@ brew "yarn", args: ["without-node"]
 brew "youtube-dl"
 # UNIX shell (command interpreter)
 brew "zsh"
+# Fish-like fast/unobtrusive autosuggestions for zsh
+brew "zsh-autosuggestions"
+# Fish shell like syntax highlighting for zsh
+brew "zsh-syntax-highlighting"
 # Change the dates of several git commits with a single command
 brew "potatolabs/git-redate/git-redate"
+# A badass zsh theme with more power than a normal earthling
+brew "sambadevi/powerlevel9k/powerlevel9k"
 cask "docker"
 cask "iterm2"
 cask "lulu"
