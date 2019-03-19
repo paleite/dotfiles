@@ -10,7 +10,6 @@ alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # readonly DIR="$(cd "$(/usr/bin/dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 readonly DIR="${HOME}/dotfiles/"
-.f status
 readonly OS=$(/usr/bin/uname)
 readonly TMPDIR=$(/usr/bin/dirname "$(/usr/bin/mktemp -u)") # Portable TMPDIR: https://unix.stackexchange.com/a/174818
 cd "$DIR"
