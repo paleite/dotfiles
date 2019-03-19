@@ -1,5 +1,4 @@
-alias dotfiles='\git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias .f='dotfiles'
+alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias alert='/usr/local/bin/notify -t "$(dirs +0)" -m "Done"; printf "\a"'
 alias cat='ccat'
