@@ -20,6 +20,13 @@
       "options": {
         "parser": "json"
       }
+    },
+    {
+      "files": ["composer.json"],
+      "options": {
+        "parser": "json-stringify",
+        "tabWidth": 4
+      }
     }
   ]
 }
