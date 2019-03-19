@@ -1,6 +1,7 @@
 # Init
 POWERLEVEL9K_MODE="nerdfont-complete"
-ZSH_THEME="powerlevel9k/powerlevel9k"
+# ZSH_THEME="powerlevel9k/powerlevel9k"
+source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
 
 # Left and right prompt elements
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir dir_writable vcs ssh)
