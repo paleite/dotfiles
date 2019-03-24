@@ -9,6 +9,7 @@
     {
       "files": [
         ".babelrc",
+        ".bootstraprc",
         ".eslintrc",
         ".huskyrc",
         ".lintstagedrc",
