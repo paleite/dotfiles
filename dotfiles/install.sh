@@ -17,13 +17,9 @@ cd "$DIR"
 ################################################################################
 # macOS
 # TODO:
-# - mathias bynens macos dotfiles/script
-# - brewfile / mas
 # - keychain
 # - icloud setup
 # - find my mac
-# - hot corners
-# - compare .macos with my current settings
 # - defaults write
 #   - spacer tiles
 #   - expand save
@@ -62,6 +58,9 @@ then
   # Install Homebrew kegs and Mac App Store apps
   echo "Installing Homebrew kegs and Mac App Store apps..."
   brew bundle
+
+  echo "Installing Sketch..."
+  brew cask install --force "${HOME}/dotfiles/casks/sketch43.rb"
 fi
 
 # Install VSCode extensions
@@ -104,6 +103,9 @@ crontab ./crontab
 
 # Create .extra-file
 [ -e "${HOME}/.extra" ] || touch "${HOME}/.extra"
+
+# Ensure control-directory for .ssh-connections
+mkdir -p "${HOME}/.ssh/control"
 
 echo "Restarting Dock..."
 

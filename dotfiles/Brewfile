@@ -4,7 +4,6 @@ tap "danielbayley/adobe"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
-tap "homebrew/science"
 tap "homebrew/services"
 tap "jonof/kenutils"
 tap "potatolabs/git-redate"
@@ -13,6 +12,8 @@ tap "sambadevi/powerlevel9k"
 brew "apktool"
 # MPEG-4 command-line tool
 brew "atomicparsley"
+# Client for Amazon Elastic Beanstalk web service
+brew "aws-elasticbeanstalk"
 # Programmable completion for Bash 3.2
 brew "bash-completion"
 # Collection of portable C++ source libraries
@@ -63,6 +64,10 @@ brew "jq"
 brew "librsvg"
 # YAML Parser
 brew "libyaml"
+# Text-based web browser
+brew "lynx"
+# Keep your Mac's application settings in sync
+brew "mackup"
 # Mac App Store command-line interface
 brew "mas"
 # MP3 player for Linux and UNIX
@@ -73,6 +78,8 @@ brew "n"
 brew "nmap"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
+# Tool to automatically fix PHP coding standards issues
+brew "php-cs-fixer"
 # Object-relational database system
 brew "postgresql"
 # Interpreted, interactive, object-oriented programming language
@@ -102,7 +109,7 @@ brew "wdiff"
 # Internet file retriever
 brew "wget"
 # JavaScript package manager
-brew "yarn", args: ["without-node"]
+brew "yarn"
 # Download YouTube videos from the command-line
 brew "youtube-dl"
 # UNIX shell (command interpreter)

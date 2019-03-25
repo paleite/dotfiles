@@ -125,7 +125,7 @@ defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 # defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
 # Disable auto-correct
-# defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
 # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
@@ -692,6 +692,13 @@ defaults write com.apple.terminal SecureKeyboardEntry -bool true
 hash tmutil &> /dev/null && sudo tmutil disablelocal
 
 ###############################################################################
+# FileVault                                                                   #
+###############################################################################
+
+# Enable FileVault Service
+sudo fdesetup enable
+
+###############################################################################
 # Activity Monitor                                                            #
 ###############################################################################
 
@@ -912,6 +919,13 @@ defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool t
 # defaults write com.tapbots.TweetbotMac OpenURLsDirectly -bool true
 
 ###############################################################################
+# Sketch.app                                                                  #
+###############################################################################
+
+# Export Compact SVGs
+defaults write com.bohemiancoding.sketch3 exportCompactSVG -bool yes
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 
@@ -939,4 +953,6 @@ for app in "Activity Monitor" \
 	"iCal"; do
 	killall "${app}" &> /dev/null
 done
-echo "Done. Note that some of these changes require a logout/restart to take effect."
+
+echo "Done."
+echo "Note that some of these changes require a logout/restart to take effect."
