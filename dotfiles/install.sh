@@ -29,14 +29,20 @@ cd "$DIR"
 
 if [ "${OS}" == "Darwin" ]
 then
+  # Install software (e.g. git, make, etc.)
+  # ./xcode-install.sh
+  /bin/sh -c "$(/usr/bin/curl -fsSL https://raw.githubusercontent.com/paleite/dotfiles/next/dotfiles/xcode-install.sh)"
+fi
+
+/bin/sh -c "$(/usr/bin/curl -fsSL https://raw.githubusercontent.com/paleite/dotfiles/next/dotfiles/clone.sh)"
+
+if [ "${OS}" == "Darwin" ]
+then
   # Change default settings
   ./macos.sh
 
-  # Install software (e.g. git, make, etc.)
-  ./xcode-install.sh
-
   # Install oh-my-zsh
-  /bin/sh -c "$(/usr/bin/curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  ./oh-my-zsh.sh
 
   # Note: This is only to install homebrew. NOT to install its Brewfile
   ./brew.sh
@@ -45,7 +51,7 @@ fi
 ################################################################################
 # Software / global packages
 # TODO:
-# - yarn (global package.json)
+# - yarn (global package.json) clone required
 # - gem
 # - composer
 # - docker?
@@ -58,9 +64,6 @@ then
   # Install Homebrew kegs and Mac App Store apps
   echo "Installing Homebrew kegs and Mac App Store apps..."
   brew bundle
-
-  echo "Installing Sketch..."
-  brew cask install --force "${HOME}/dotfiles/casks/sketch43.rb"
 fi
 
 # Install VSCode extensions
@@ -68,16 +71,12 @@ fi
 
 # Configure yarn
 echo "Configuring yarn..."
-# TODO:
-# - First we need to have git and/or mackup to get the config files
-# - then we need to have installed yarn (through Brew?)
-# TODO: Improvement: Move to function
 # Save exact version when adding
 yarn config set save-exact true
 # Mirror packages offline
 yarn config set yarn-offline-mirror "${TMPDIR}/npm-packages-offline-mirror"
 yarn config set yarn-offline-mirror-pruning true
-
+yarn global upgrade
 
 ################################################################################
 # Misc software
@@ -87,6 +86,9 @@ echo "Installing misc software..."
 
 if [ "${OS}" == "Darwin" ]
 then
+  echo "Installing Sketch 43"
+  brew cask install --force "${HOME}/dotfiles/casks/sketch43.rb"
+
   echo "Installing PHP 7.3"
   /usr/bin/curl -s https://php-osx.liip.ch/install.sh | /bin/bash -s force 7.3
 fi
@@ -114,3 +116,5 @@ then
   killall Dock
 fi
 
+# Manual steps
+# Once Dropbox has synced, restore settings using `mackup restore`.
