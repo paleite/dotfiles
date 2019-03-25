@@ -49,7 +49,6 @@ fi
 ################################################################################
 # Software / global packages
 # TODO:
-# - brew (Brewfile)
 # - yarn (global package.json)
 # - gem
 # - composer
@@ -61,19 +60,19 @@ fi
 if [ "${OS}" == "Darwin" ]
 then
   # Install Homebrew kegs and Mac App Store apps
-  echo "Installing Homebrew kegs and Mac App Store apps…"
+  echo "Installing Homebrew kegs and Mac App Store apps..."
   brew bundle
-
-  # # `svgo` currently requires `node`, but we install it through `n`, so it's not needed anymore
-  brew uninstall --ignore-dependencies node
 fi
 
 # Install VSCode extensions
 ./import-vscode-extensions.sh
 
 # Configure yarn
-echo "Configuring yarn…"
-# TODO: Move to function
+echo "Configuring yarn..."
+# TODO:
+# - First we need to have git and/or mackup to get the config files
+# - then we need to have installed yarn (through Brew?)
+# TODO: Improvement: Move to function
 # Save exact version when adding
 yarn config set save-exact true
 # Mirror packages offline
@@ -85,7 +84,7 @@ yarn config set yarn-offline-mirror-pruning true
 # Misc software
 ################################################################################
 
-echo "Installing misc software…"
+echo "Installing misc software..."
 
 if [ "${OS}" == "Darwin" ]
 then
@@ -98,7 +97,7 @@ fi
 # Cronjobs
 ################################################################################
 
-echo "Installing cronjobs…"
+echo "Installing cronjobs..."
 
 cat ./crontab
 crontab ./crontab
@@ -106,7 +105,7 @@ crontab ./crontab
 # Create .extra-file
 [ -e "${HOME}/.extra" ] || touch "${HOME}/.extra"
 
-echo "Restarting Dock…"
+echo "Restarting Dock..."
 
 if [ "${OS}" == "Darwin" ]
 then
