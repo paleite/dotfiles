@@ -1,4 +1,5 @@
-MAILTO=patrick.eriksson.se@gmail.com
+source $HOME/.path
+source $HOME/.extra
 #
 # env EDITOR=nano crontab -e
 #
@@ -36,4 +37,3 @@ MAILTO=patrick.eriksson.se@gmail.com
    2      13        1        *         *        $HOME/crontab.sh monthly
 #  */15    *        *        *         *        $HOME/bin/temp-help.sh
 #=====================================================================#
-
