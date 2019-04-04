@@ -64,6 +64,10 @@ then
   # Install Homebrew kegs and Mac App Store apps
   echo "Installing Homebrew kegs and Mac App Store apps..."
   brew bundle
+
+  echo "Installing gems with Bundler..."
+  gem install bundler
+  bundle install --system --gemfile Gemfile
 fi
 
 # Install VSCode extensions

@@ -3,9 +3,11 @@ tap "caskroom/fonts"
 tap "danielbayley/adobe"
 tap "homebrew/bundle"
 tap "homebrew/cask"
+tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "jonof/kenutils"
+tap "paleite/versions"
 tap "potatolabs/git-redate"
 tap "sambadevi/powerlevel9k"
 # Tool for reverse engineering 3rd party, closed, binary Android apps
@@ -30,6 +32,8 @@ brew "cmake"
 brew "colordiff"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Good-lookin' diffs with diff-highlight and more
+brew "diff-so-fancy"
 # Perl lib for reading and writing EXIF metadata
 brew "exiftool"
 # Free lossless audio codec
@@ -70,6 +74,8 @@ brew "lynx"
 brew "mackup"
 # Mac App Store command-line interface
 brew "mas"
+# Collection of tools that nobody wrote when UNIX was young
+brew "moreutils"
 # MP3 player for Linux and UNIX
 brew "mpg123"
 # Node version management
@@ -78,6 +84,8 @@ brew "n"
 brew "nmap"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
+# Shell command parallelization utility
+brew "parallel"
 # Tool to automatically fix PHP coding standards issues
 brew "php-cs-fixer"
 # Object-relational database system
@@ -122,10 +130,21 @@ brew "zsh-syntax-highlighting"
 brew "potatolabs/git-redate/git-redate"
 # A badass zsh theme with more power than a normal earthling
 brew "sambadevi/powerlevel9k/powerlevel9k"
+cask "cyberduck"
+cask "disk-inventory-x"
 cask "docker"
+cask "dropbox"
+cask "flux"
+cask "github"
+cask "google-chrome"
+cask "google-chrome-canary"
+cask "imagealpha"
+cask "imageoptim"
 cask "iterm2"
 cask "lulu"
+cask "macdown"
 cask "majestic"
+cask "notable"
 cask "qlcolorcode"
 cask "qlimagesize"
 cask "qlmarkdown"
@@ -135,11 +154,15 @@ cask "qlvideo"
 cask "quicklook-csv"
 cask "quicklook-json"
 cask "quicklookase"
+cask "sourcetree"
 cask "spotify"
 cask "spotify-notifications"
+cask "sublime-text"
 cask "visual-studio-code"
 cask "webpquicklook"
+cask "whatsapp"
 cask "caskroom/fonts/font-hack-nerd-font"
+cask "paleite/versions/sketch43"
 mas "GlucoGram", id: 1107429772
 mas "JPEGmini", id: 498944723
 mas "Memory Clean 2", id: 1114591412
