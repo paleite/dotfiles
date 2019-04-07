@@ -10,7 +10,7 @@ unset file;
 # if [ -f $(brew --prefix)/etc/bash_completion ]; then
 #   . $(brew --prefix)/etc/bash_completion
 # fi
-[[ -s /usr/local/etc/bash_completion ]] && source /usr/local/etc/bash_completion
+[[ $BASH ]] && [[ -s /usr/local/etc/bash_completion ]] && source /usr/local/etc/bash_completion
 
 # if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi # Very slow and dangerous. Should rbenv ever be compromised, this will grant it access to inject code.
 

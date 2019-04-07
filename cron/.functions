@@ -1,0 +1,24 @@
+function _run_cronjob() {
+  echo "Running cronjob '$@' from $(pwd)."
+
+  if [[ "${DEBUG:-false}" != 'true' ]] && hash chronic 2>/dev/null; then
+      chronic $@
+  else
+      $@
+  fi
+}
+
+function _exit_on_tethered() {
+  if is-tethered;
+  then
+    echo "Won't run all of '${1:-$0}' on tethered connection"
+    exit 1
+  fi
+}
+
+function _title() {
+  local COLUMNS
+  COLUMNS=$(tput cols)
+  COLUMNS="${COLUMNS:-80}"
+  echo "=≡☰ ${*} ☰≡=" | awk '{L = '"${COLUMNS}"' - length; for(i=1; i<=int(L/2); i++) {printf "-";} printf "%s", $0; for(i=1; i<=int(L/2+.5); i++) {printf "-";}printf "\n";}'
+}

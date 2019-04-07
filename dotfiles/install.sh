@@ -11,7 +11,8 @@ alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # readonly DIR="$(cd "$(/usr/bin/dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 readonly DIR="${HOME}/dotfiles/"
 readonly OS=$(/usr/bin/uname)
-readonly TMPDIR=$(/usr/bin/dirname "$(/usr/bin/mktemp -u)") # Portable TMPDIR: https://unix.stackexchange.com/a/174818
+# Portable TMPDIR: https://unix.stackexchange.com/a/174818
+readonly TMPDIR=$(/usr/bin/dirname "$(/usr/bin/mktemp -u)")
 cd "$DIR"
 
 ################################################################################
@@ -20,11 +21,6 @@ cd "$DIR"
 # - keychain
 # - icloud setup
 # - find my mac
-# - defaults write
-#   - spacer tiles
-#   - expand save
-#   - turn off smart quotes, auto caps, autocorrect
-#   - dark mode
 ################################################################################
 
 if [ "${OS}" == "Darwin" ]
@@ -45,7 +41,25 @@ then
   ./oh-my-zsh.sh
 
   # Note: This is only to install homebrew. NOT to install its Brewfile
+  echo "(Brew) Installing Homebrew"
   ./brew.sh
+
+  echo "(Node.js) Installing Node.js and Yarn"
+  brew install n yarn
+  # Install latest Node.js
+  n latest
+  # Configure yarn
+  #€ Save exact version when adding
+  yarn config set save-exact true
+  #€ Mirror packages offline
+  yarn config set yarn-offline-mirror "${TMPDIR}/npm-packages-offline-mirror"
+  yarn config set yarn-offline-mirror-pruning true
+
+  echo "(PHP) Installing PHP 7.3"
+  /usr/bin/curl -s https://php-osx.liip.ch/install.sh | /bin/bash -s force 7.3
+
+  echo "(Ruby) Installing Bundler"
+  gem install bundler
 fi
 
 ################################################################################
@@ -62,25 +76,21 @@ fi
 if [ "${OS}" == "Darwin" ]
 then
   # Install Homebrew kegs and Mac App Store apps
-  echo "Installing Homebrew kegs and Mac App Store apps..."
+  echo "(Brew) Installing Homebrew kegs and Mac App Store apps..."
   brew bundle
 
-  echo "Installing gems with Bundler..."
-  gem install bundler
+  echo "(Node.js) Installing global packages with Yarn"
+  yarn global upgrade
+
+  echo "(PHP) Installing global packages with Composer"
+  composer global install
+
+  echo "(Ruby) Installing global gems with Bundler..."
   bundle install --system --gemfile Gemfile
 fi
 
 # Install VSCode extensions
 ./import-vscode-extensions.sh
-
-# Configure yarn
-echo "Configuring yarn..."
-# Save exact version when adding
-yarn config set save-exact true
-# Mirror packages offline
-yarn config set yarn-offline-mirror "${TMPDIR}/npm-packages-offline-mirror"
-yarn config set yarn-offline-mirror-pruning true
-yarn global upgrade
 
 ################################################################################
 # Misc software
@@ -92,9 +102,6 @@ if [ "${OS}" == "Darwin" ]
 then
   echo "Installing Sketch 43"
   brew cask install --force "${HOME}/dotfiles/casks/sketch43.rb"
-
-  echo "Installing PHP 7.3"
-  /usr/bin/curl -s https://php-osx.liip.ch/install.sh | /bin/bash -s force 7.3
 fi
 
 
@@ -121,4 +128,6 @@ then
 fi
 
 # Manual steps
-# Once Dropbox has synced, restore settings using `mackup restore`.
+# Once Dropbox has synced:
+# - Restore settings using `mackup restore`
+# - Restore permissions in scripts by running /bin/chmod +x "${HOME}"/*.sh "${HOME}"/dev/*.sh "${HOME}"/cron/*.sh

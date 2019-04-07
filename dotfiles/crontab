@@ -1,39 +1,41 @@
-source $HOME/.path
-source $HOME/.extra
+ENVIRONMENT=cron
+TERM=dumb
+# MAILTO=email@example.net
+
 #
 # env EDITOR=nano crontab -e
 #
 # see cron/ folder
 #    chmod +x *.sh
 
-#=====================================================================#
-#     0-23   0-59               0-30  0-6   1-12                      #
-#     |_    _|                 _|    _|    _|                         #
-#       |  |                  |     |     |            * any          #
-#    At HH:MM on day-of-month MD on WD in M            - range        #
-#       |  |                  |     |     |            , array        #
-#     __|__|            ______|     |   __|            / step         #
-#    |  |            __|         ___|__|                              #
-#   _|  |__         |         __|   |__                               #
-#  |       |        |        |         |                              #
-#  |       |        |        |         |                              #
-#=====================================================================#
-#  Min  |  Hour  |  Mday  |  Month  |  Wday  |  Command               #
-#=====================================================================#
-#  0       3        *        *         *        $HOME/cron/daily-nighttime.sh
-#  2      13        *        *         *        $HOME/cron/daily-after-lunch.sh
-   2      13        *        *         *        $HOME/crontab.sh daily
-#  */5     *        *        *         *        $HOME/cron/every-five-minutes.sh
-#  */5     9-17     *        *         1-5      $HOME/cron/every-five-minutes-work.sh
-   */5     9-17     *        *         1-5      $HOME/crontab.sh 5minwork
-#  15      *        *        *         *        $HOME/cron/every-hour.sh
-#  20      17,18    *        *         1-5      $HOME/cron/twice-during-weekdays.sh
-#  20      17,18    *        *         1-5      $HOME/cron/twice-during-weekdays.sh
-#  0       0        *        *         0        $HOME/cron/twice-a-week.sh
-#  7      13        *        *         2        $HOME/cron/weekly.sh
-   7      13        *        *         2        $HOME/crontab.sh weekly
-#  0       0        *        *         4        $HOME/cron/twice-a-week.sh
-#  2      13        1        *         *        $HOME/cron/monthly.sh
-   2      13        1        *         *        $HOME/crontab.sh monthly
-#  */15    *        *        *         *        $HOME/bin/temp-help.sh
-#=====================================================================#
+#==============================================================================#
+#     0-23   0-59               0-30  0-6   1-12                               #
+#     |_    _|                 _|    _|    _|                                  #
+#       |  |                  |     |     |            * any                   #
+#    At HH:MM on day-of-month MD on WD in M            - range                 #
+#       |  |                  |     |     |            , array                 #
+#     __|__|            ______|     |   __|            / step                  #
+#    |  |            __|         ___|__|                                       #
+#   _|  |__         |         __|   |__                                        #
+#  |       |        |        |         |                                       #
+#  |       |        |        |         |                                       #
+#==============================================================================#
+#  Min  |  Hour  |  Mday  |  Month  |  Wday  |  Command                        #
+#==============================================================================#
+#  0       3        *        *         *        ./cron/.run.sh daily-nighttime
+   2      10        *        *         1-5      ./cron/.run.sh daily-at-10-during-weekdays
+   2      11        *        *         1-5      ./cron/.run.sh daily-at-11-during-weekdays
+   2      13        *        *         *        ./cron/.run.sh daily-after-lunch
+   2      15        *        *         1-5      ./cron/.run.sh daily-at-15-during-weekdays
+#  */5     *        *        *         *        ./cron/.run.sh every-five-minutes
+   */5     9-17     *        *         1-5      ./cron/.run.sh every-five-minutes-during-weekdays
+# 15       *        *        *         *        ./cron/.run.sh every-hour
+# 20      17,18     *        *         1-5      ./cron/.run.sh twice-during-weekdays
+#  0       0        *        *         0        ./cron/.run.sh twice-a-week
+#  7      13        *        *         2        ./cron/.run.sh weekly
+   7      13        *        *         2        ./cron/.run.sh weekly
+#  0       0        *        *         4        ./cron/.run.sh twice-a-week
+#  2      13        1        *         *        ./cron/.run.sh monthly
+   2      13        1        *         *        ./cron/.run.sh monthly
+#  */15    *        *        *         *        ./bin/temp-help.sh
+#==============================================================================#
