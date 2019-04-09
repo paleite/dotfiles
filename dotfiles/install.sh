@@ -131,3 +131,6 @@ fi
 # Once Dropbox has synced:
 # - Restore settings using `mackup restore`
 # - Restore permissions in scripts by running /bin/chmod +x "${HOME}"/*.sh "${HOME}"/dev/*.sh "${HOME}"/cron/*.sh
+# - Restore fonts
+# rsync -rtuv  ~/Library/Fonts/* ~/Dropbox/Mackup/Library/Fonts/
+# rsync -rtuv  ~/Dropbox/Mackup/Library/Fonts/* ~/Library/Fonts/
