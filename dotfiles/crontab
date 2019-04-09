@@ -1,6 +1,5 @@
 ENVIRONMENT=cron
 TERM=dumb
-# MAILTO=email@example.net
 
 #
 # env EDITOR=nano crontab -e

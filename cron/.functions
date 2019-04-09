@@ -1,10 +1,10 @@
 function _run_cronjob() {
-  echo "Running cronjob '$@' from $(pwd)."
-
   if [[ "${DEBUG:-false}" != 'true' ]] && hash chronic 2>/dev/null; then
-      chronic $@
+    chronic -v $@
   else
-      $@
+    echo "[DEBUG] Not using Chronic."
+    $@
+    echo "[DEBUG] Error code was $?"
   fi
 }
 
@@ -21,4 +21,19 @@ function _title() {
   COLUMNS=$(tput cols)
   COLUMNS="${COLUMNS:-80}"
   echo "=≡☰ ${*} ☰≡=" | awk '{L = '"${COLUMNS}"' - length; for(i=1; i<=int(L/2); i++) {printf "-";} printf "%s", $0; for(i=1; i<=int(L/2+.5); i++) {printf "-";}printf "\n";}'
+}
+
+function _print_shortlist() {
+  cd "$(dirname "${BASH_SOURCE[0]}")"
+  SHORTLIST=()
+  for i in *.sh;
+  do
+    SCRIPT_PATH="${i}"
+    if [ -r "$SCRIPT_PATH" ] && [ -x "$SCRIPT_PATH" ];
+    then
+      SHORTLIST+=("${i%.sh}")
+    fi
+  done
+
+  echo ${SHORTLIST[*]}
 }
