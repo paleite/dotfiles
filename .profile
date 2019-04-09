@@ -14,6 +14,4 @@ unset file;
 
 # if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi # Very slow and dangerous. Should rbenv ever be compromised, this will grant it access to inject code.
 
-if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
-    tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
-fi
+ssh_tmux
