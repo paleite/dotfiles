@@ -8,14 +8,18 @@ set -o nounset
 readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 cd "${DIR}"
+# shellcheck source=cron/.functions
 source .functions
 
 cd "${HOME}"/dev/MacDown-Template
 yarn run build
 _exit_on_tethered
 
-_title "brew update && brew upgrade"
-(brew update && brew upgrade)
+_title "brew update"
+brew update
+
+_title "brew upgrade"
+brew upgrade
 
 _title "brew cask upgrade --greedy"
 brew cask upgrade --greedy

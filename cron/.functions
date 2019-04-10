@@ -1,17 +1,17 @@
+#!/usr/bin/env bash
+
 function _run_cronjob() {
   if [[ "${DEBUG:-false}" != 'true' ]] && hash chronic 2>/dev/null; then
-    chronic -v $@
+    chronic -v "$@"
   else
-    echo "[DEBUG] Not using Chronic."
-    $@
-    echo "[DEBUG] Error code was $?"
+    "$@"
   fi
 }
 
 function _exit_on_tethered() {
   if is-tethered;
   then
-    echo "Won't run all of '${1:-$0}' on tethered connection"
+    echo "Won't run all of '${JOB_NAME:-$0}' on tethered connection"
     exit 1
   fi
 }
@@ -24,7 +24,7 @@ function _title() {
 }
 
 function _print_shortlist() {
-  cd "$(dirname "${BASH_SOURCE[0]}")"
+  cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
   SHORTLIST=()
   for i in *.sh;
   do
@@ -35,5 +35,5 @@ function _print_shortlist() {
     fi
   done
 
-  echo ${SHORTLIST[*]}
+  echo "${SHORTLIST[*]}"
 }

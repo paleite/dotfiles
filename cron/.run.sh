@@ -10,5 +10,6 @@ set -o nounset
 
 shopt -s expand_aliases
 
+# shellcheck source=cron/.functions
 source "${HOME}"/cron/.functions
-_run_cronjob "${HOME}"/cron/.route.sh "$@" | cron-gmail --subject "$@" --tag "cron $@"
+_run_cronjob "${HOME}"/cron/.route.sh "$@" | cron-gmail --subject "[Cron] $@" --tag "cron $*"

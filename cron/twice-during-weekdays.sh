@@ -8,7 +8,7 @@ set -o nounset
 readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 cd "${DIR}"
-# shellcheck source=.functions
+# shellcheck source=cron/.functions
 source .functions
 
 exit 127
