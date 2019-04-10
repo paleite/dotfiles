@@ -26,11 +26,10 @@ install_xcode_command_line_tools() {
   if [[ "$PROD" != "" ]]
   then
     sudo /usr/sbin/softwareupdate --install "${PROD}"
-    return 0
   fi
 
-  sudo /bin/rm -f /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
   sudo /usr/bin/xcode-select --switch /Library/Developer/CommandLineTools
+  sudo /bin/rm -f /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 
   # Fallback solution (UNTESTED)
   ##############################################################################
