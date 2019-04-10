@@ -93,25 +93,11 @@ fi
 ./import-vscode-extensions.sh
 
 ################################################################################
-# Misc software
-################################################################################
-
-echo "Installing misc software..."
-
-if [ "${OS}" == "Darwin" ]
-then
-  echo "Installing Sketch 43"
-  brew cask install --force "${HOME}/dotfiles/casks/sketch43.rb"
-fi
-
-
-################################################################################
 # Cronjobs
 ################################################################################
 
 echo "Installing cronjobs..."
 
-cat ./crontab
 crontab ./crontab
 
 # Create .extra-file
