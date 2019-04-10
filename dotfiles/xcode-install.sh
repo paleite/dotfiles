@@ -14,22 +14,21 @@ are_xcode_command_line_tools_installed() {
 install_xcode_command_line_tools() {
   /usr/bin/touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 
-  MACOS_VERSION=$( \
-    defaults read loginwindow SystemVersionStampAsString | \
-    /usr/bin/grep --color=never -o -E '^[0-9]+\.[0-9]+' \
-  )
-
+  # Get the product name for Command Line Tools
+  # It starts with an asterisk
   PROD=$( \
-    sudo /usr/sbin/softwareupdate -l | \
-    /usr/bin/grep --color=never -B 1 -E 'Command Line (Developer|Tools)' | \
-    /usr/bin/awk -F'*' '/^ +\\*/ {print $2}' | \
-    /usr/bin/grep "${MACOS_VERSION}" | \
-    /usr/bin/sort -V | \
-    /usr/bin/sed 's/^ *//' | \
-    /usr/bin/tail -n1 \
+    sudo /usr/sbin/softwareupdate --list --no-scan | \
+    /usr/bin/grep -E '^ +[-\*]' | \
+    /usr/bin/grep -E 'Command Line Tools' | \
+    /usr/bin/awk -F'*' '/^ +\\*/ {print $2}' || true
   )
 
-  sudo /usr/sbin/softwareupdate --install "$PROD" > /dev/null
+  if [[ "$PROD" != "" ]]
+  then
+    sudo /usr/sbin/softwareupdate --install "${PROD}"
+    return 0
+  fi
+
   sudo /bin/rm -f /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
   sudo /usr/bin/xcode-select --switch /Library/Developer/CommandLineTools
 
