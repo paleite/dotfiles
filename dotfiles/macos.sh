@@ -962,7 +962,6 @@ for APP in \
   "Sketch" \
   "Spectacle" \
   "SystemUIServer" \
-  "Terminal" \
   "Transmission" \
   "Tweetbot" \
   "Twitter" \
