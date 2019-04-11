@@ -52,6 +52,11 @@ then
 
   echo "(Node.js) Installing Node.js and Yarn"
   brew install n yarn
+
+  # https://github.com/tj/n/issues/416
+  sudo mkdir /usr/local/n
+  sudo chown -R $(whoami) /usr/local/n
+
   # Install latest Node.js
   n latest
   # Configure yarn
