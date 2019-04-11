@@ -8,6 +8,8 @@ set -o nounset
 shopt -s expand_aliases
 alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+echo "$(tput bold)dotfiles install$(tput sgr0)"
+
 readonly DIR="${HOME}/dotfiles/"
 readonly OS=$(/usr/bin/uname)
 # Portable TMPDIR: https://unix.stackexchange.com/a/174818
@@ -50,8 +52,8 @@ then
   echo "(Brew) Installing Homebrew"
   ./brew.sh
 
-  echo "(Node.js) Installing Node.js and Yarn"
-  brew install n yarn
+  echo "Installing Node.js, Yarn and rbenv"
+  brew install n yarn rbenv
 
   # https://github.com/tj/n/issues/416
   sudo mkdir -p /usr/local/n
