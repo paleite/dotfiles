@@ -69,6 +69,19 @@ then
   echo "(PHP) Installing PHP 7.3"
   /usr/bin/curl -s https://php-osx.liip.ch/install.sh | /bin/bash -s force 7.3
 
+  echo "(Ruby) Installing latest ruby dev"
+  readonly RUBY_VERSION=$( \
+    rbenv install --list | \
+    grep -e '\s\d\.\d\.\d-dev' | \
+    tail -n1 | \
+    /usr/bin/sed 's/^ *//' | \
+    /usr/bin/tr -d '\n' \
+  )
+  # https://github.com/rbenv/ruby-build/issues/1064#issuecomment-289641586
+  RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv install "${RUBY_VERSION}"
+  rbenv global "${RUBY_VERSION}"
+  rbenv rehash
+
   echo "(Ruby) Installing Bundler"
   gem install bundler
 fi
