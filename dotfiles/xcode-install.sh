@@ -5,6 +5,9 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+# Inspirations:
+# https://raw.githubusercontent.com/alrra/dotfiles/master/src/os/install/macos/xcode.sh
+
 # Install Xcode Command Line Tools (adds git, make, etc. needed for homebrew)
 echo "Installing Xcode Command Line Tools (xcode-select)..."
 are_xcode_command_line_tools_installed() {
@@ -14,19 +17,22 @@ are_xcode_command_line_tools_installed() {
 install_xcode_command_line_tools() {
   /usr/bin/touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 
-  # Get the product name for Command Line Tools
-  # It starts with an asterisk
+  # Get the product name for Command Line Tools:
+  # awk with delimiter '*'
+  # sed removes leading space
+  # tr removes trailing newline
   PROD=$( \
     sudo /usr/sbin/softwareupdate --list | \
-    /usr/bin/grep -E '^ +[-\*] ' | \
-    /usr/bin/grep -E 'Command Line Tools' | \
+    /usr/bin/grep -E '^ +\* Command Line Tools' | \
     /usr/bin/awk -F'*' '/^ +\\*/ {print $2}' | \
-    /usr/bin/sed 's/^ *//' || true
+    /usr/bin/sed 's/^ *//' | \
+    /usr/bin/tr -d '\n' || \
+    true \
   )
 
   if [[ "$PROD" != "" ]]
   then
-    sudo /usr/sbin/softwareupdate --install "${PROD}"
+    sudo /usr/sbin/softwareupdate --verbose --install "${PROD}"
   fi
 
   sudo /usr/bin/xcode-select --switch /Library/Developer/CommandLineTools

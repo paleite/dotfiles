@@ -10,9 +10,8 @@ alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # Inspirations:
 # https://raw.githubusercontent.com/mathiasbynens/dotfiles/master/.macos
-# https://raw.githubusercontent.com/alrra/dotfiles/master/src/os/install/macos/xcode.sh
 
-echo "Setting up macOS"
+echo "$(tput bold)dotfiles macos$(tput sgr0)"
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
@@ -181,8 +180,10 @@ sudo pmset -a hibernatemode 0
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
 
 # Use scroll gesture with the Alt modifier key to zoom
-defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
-defaults write com.apple.universalaccess closeViewScrollWheelModifiersInt -int 524288
+# TODO: Investigate why this doesn't work anymore
+#defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+#defaults write com.apple.universalaccess closeViewScrollWheelModifiersInt -int 524288
+
 # Follow the keyboard focus while zoomed in
 # defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 
@@ -326,7 +327,7 @@ defaults write NSGlobalDomain com.apple.springing.delay -float 0.5
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
-# Disable the warning before emptying the Trash
+# ~~Disable~~ Enable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool true
 
 # # Enable AirDrop over Ethernet and on unsupported Macs running Lion
@@ -345,13 +346,13 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool true
 # Expand the following File Info panes:
 # “General”, “Open with”, and “Sharing & Permissions”
 defaults write com.apple.finder FXInfoPanesExpanded -dict \
-	Comments -bool true \
-	General -bool true \
-	MetaData -bool false \
-	Name -bool true \
-	OpenWith -bool false \
-	Preview -bool false \
-	Privileges -bool true
+  Comments -bool true \
+  General -bool true \
+  MetaData -bool false \
+  Name -bool true \
+  OpenWith -bool false \
+  Preview -bool false \
+  Privileges -bool true
 
 ###############################################################################
 # ock, DashboaDrd, and hot corners                                            #
@@ -611,7 +612,8 @@ defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
 # 	'{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
 # 	'{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
 # Load new settings before rebuilding the index
-killall mds > /dev/null 2>&1
+# TODO: Investigate why it exits with non-zero code
+killall mds > /dev/null 2>&1 || true
 # Make sure indexing is enabled for the main volume
 sudo mdutil -i on / > /dev/null
 # Rebuild the index from scratch
@@ -696,15 +698,18 @@ defaults write com.apple.terminal SecureKeyboardEntry -bool true
 # # Prevent Time Machine from prompting to use new hard drives as backup volume
 # defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
-# Disable local Time Machine backups
-hash tmutil &> /dev/null && sudo tmutil disablelocal
+# # Disable local Time Machine backups
+# hash tmutil &> /dev/null && sudo tmutil disablelocal
 
 ###############################################################################
 # FileVault                                                                   #
 ###############################################################################
 
 # Enable FileVault Service
-sudo fdesetup enable
+if [[ $(sudo fdesetup isactive) != "true" ]];
+then
+  sudo fdesetup enable
+fi
 
 ###############################################################################
 # Activity Monitor                                                            #
@@ -713,8 +718,8 @@ sudo fdesetup enable
 # Show the main window when launching Activity Monitor
 defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
 
-# # Visualize CPU usage in the Activity Monitor Dock icon
-# defaults write com.apple.ActivityMonitor IconType -int 5
+# Visualize CPU usage in the Activity Monitor Dock icon
+defaults write com.apple.ActivityMonitor IconType -int 5
 
 # Show all processes in Activity Monitor
 defaults write com.apple.ActivityMonitor ShowCategory -int 0
@@ -846,6 +851,13 @@ defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool t
 # defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false
 
 ###############################################################################
+# Sketch.app                                                                  #
+###############################################################################
+
+# Export Compact SVGs
+defaults write com.bohemiancoding.sketch3 exportCompactSVG -bool yes
+
+###############################################################################
 # Sublime Text                                                                #
 ###############################################################################
 
@@ -927,40 +939,36 @@ defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool t
 # defaults write com.tapbots.TweetbotMac OpenURLsDirectly -bool true
 
 ###############################################################################
-# Sketch.app                                                                  #
-###############################################################################
-
-# Export Compact SVGs
-defaults write com.bohemiancoding.sketch3 exportCompactSVG -bool yes
-
-###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 
-for app in "Activity Monitor" \
-	"Address Book" \
-	"Calendar" \
-	"cfprefsd" \
-	"Contacts" \
-	"Dock" \
-	"Finder" \
-	"Google Chrome Canary" \
-	"Google Chrome" \
-	"Mail" \
-	"Messages" \
-	"Opera" \
-	"Photos" \
-	"Safari" \
-	"SizeUp" \
-	"Spectacle" \
-	"SystemUIServer" \
-	"Terminal" \
-	"Transmission" \
-	"Tweetbot" \
-	"Twitter" \
-	"iCal"; do
-	killall "${app}" &> /dev/null
+for APP in \
+  "Activity Monitor" \
+  "Address Book" \
+  "Calendar" \
+  "cfprefsd" \
+  "Contacts" \
+  "Dock" \
+  "Finder" \
+  "Google Chrome Canary" \
+  "Google Chrome" \
+  "iCal" \
+  "Mail" \
+  "Messages" \
+  "Opera" \
+  "Photos" \
+  "Safari" \
+  "SizeUp" \
+  "Sketch" \
+  "Spectacle" \
+  "SystemUIServer" \
+  "Terminal" \
+  "Transmission" \
+  "Tweetbot" \
+  "Twitter" \
+  ; do
+  killall "${APP}" &> /dev/null && open -a "${APP}" || true
 done
 
-echo "Done."
-echo "Note that some of these changes require a logout/restart to take effect."
+echo "$(tput setaf 4)info$(tput sgr0) Some of the changes require a logout/restart to take effect."
+echo "✨  Done."
