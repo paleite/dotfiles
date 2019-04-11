@@ -10,7 +10,7 @@ alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 cd "${HOME}"
 
-git clone --depth 1 --bare https://github.com/paleite/dotfiles.git "${HOME}/.dotfiles/" || .f pull
+git clone --depth 1 --bare https://github.com/paleite/dotfiles.git "${HOME}/.dotfiles/" >/dev/null 2>&1 || .f pull
 
 if .f checkout; then
   echo "Checked out config.";
