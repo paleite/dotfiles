@@ -9,4 +9,5 @@ shopt -s expand_aliases
 alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 echo "Installing Homebrew"
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# https://stackoverflow.com/questions/24426424/unattended-no-prompt-homebrew-installation-using-expect
+echo | /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
