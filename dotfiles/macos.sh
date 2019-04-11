@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+[[ "${DEBUG}" == 'true' ]] && set -o xtrace
+set -o errexit
+set -o pipefail
+set -o nounset
+
+shopt -s expand_aliases
+alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
 # Inspirations:
 # https://raw.githubusercontent.com/mathiasbynens/dotfiles/master/.macos
 # https://raw.githubusercontent.com/alrra/dotfiles/master/src/os/install/macos/xcode.sh
