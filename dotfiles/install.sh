@@ -52,6 +52,14 @@ then
   echo "(Brew) Installing Homebrew"
   ./brew.sh
 
+  brew install mas
+  mas account >/dev/null || open -a "App Store"
+
+  # Install and start dropbox and mackup early on, so we can start syncing immediately
+  brew cask install dropbox
+  open -a "Dropbox"
+  brew install mackup
+
   echo "Installing Node.js, Yarn, rbenv, composer"
   brew install n yarn rbenv composer
 
@@ -103,7 +111,7 @@ if [ "${OS}" == "Darwin" ]
 then
   # Install Homebrew kegs and Mac App Store apps
   echo "(Brew) Installing Homebrew kegs and Mac App Store apps..."
-  brew bundle
+  brew bundle --global --verbose
 
   echo "(Node.js) Installing global packages with Yarn"
   yarn global upgrade

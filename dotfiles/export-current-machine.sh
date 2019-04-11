@@ -14,7 +14,7 @@ readonly OS=$(/usr/bin/uname)
 cd "$DIR"
 
 echo "Brew: Dump Brewfile"
-brew bundle dump --force --describe
+brew bundle dump --global --force --describe
 
 echo "Mackup: Backup"
 mackup backup --force --verbose # Backup current setup to Dropbox (creates symlinks to the Dropbox-folder)
