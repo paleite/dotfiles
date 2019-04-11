@@ -5,11 +5,12 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+echo "$(tput bold)dotfiles xcode$(tput sgr0)"
+
 # Inspirations:
 # https://raw.githubusercontent.com/alrra/dotfiles/master/src/os/install/macos/xcode.sh
 
 # Install Xcode Command Line Tools (adds git, make, etc. needed for homebrew)
-echo "Installing Xcode Command Line Tools (xcode-select)..."
 are_xcode_command_line_tools_installed() {
     xcode-select --print-path &> /dev/null
 }

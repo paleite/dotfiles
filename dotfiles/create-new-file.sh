@@ -8,7 +8,15 @@ set -o nounset
 shopt -s expand_aliases
 alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-echo "$(tput bold)dotfiles oh-my-zsh$(tput sgr0)"
+readonly F="${HOME}/$1"; \
 
-echo "Installing oh-my-zsh"
-/bin/sh -c "$(/usr/bin/curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+if [[ -e $F ]]; then
+  echo "$(tput bold)$(tput setaf 1)$F already exists.$(tput sgr0)"
+  exit 1
+fi
+
+echo "Creating ${F}";
+
+touch "${F}";
+.f add "${F}";
+code "${F}";
