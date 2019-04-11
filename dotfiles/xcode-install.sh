@@ -17,7 +17,7 @@ install_xcode_command_line_tools() {
   # Get the product name for Command Line Tools
   # It starts with an asterisk
   PROD=$( \
-    sudo /usr/sbin/softwareupdate --list --no-scan | \
+    sudo /usr/sbin/softwareupdate --list | \
     /usr/bin/grep -E '^ +[-\*]' | \
     /usr/bin/grep -E 'Command Line Tools' | \
     /usr/bin/awk -F'*' '/^ +\\*/ {print $2}' || true
