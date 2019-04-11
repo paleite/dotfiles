@@ -18,9 +18,9 @@ install_xcode_command_line_tools() {
   # It starts with an asterisk
   PROD=$( \
     sudo /usr/sbin/softwareupdate --list | \
-    /usr/bin/grep -E '^ +[-\*]' | \
+    /usr/bin/grep -E '^ +[-\*] ' | \
     /usr/bin/grep -E 'Command Line Tools' | \
-    /usr/bin/awk -F'*' '/^ +\\*/ {print $2}' || true
+    /usr/bin/awk -F'*' '/^ +\\* / {print $2}' || true
   )
 
   if [[ "$PROD" != "" ]]
