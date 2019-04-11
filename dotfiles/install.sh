@@ -52,8 +52,8 @@ then
   echo "(Brew) Installing Homebrew"
   ./brew.sh
 
-  echo "Installing Node.js, Yarn and rbenv"
-  brew install n yarn rbenv
+  echo "Installing Node.js, Yarn, rbenv, composer"
+  brew install n yarn rbenv composer
 
   # https://github.com/tj/n/issues/416
   sudo mkdir -p /usr/local/n
