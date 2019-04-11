@@ -8,9 +8,9 @@ set -o nounset
 shopt -s expand_aliases
 alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-git clone --depth 1 --bare https://github.com/paleite/dotfiles.git "${HOME}/.dotfiles/" || .f pull
-
 cd "${HOME}"
+
+git clone --depth 1 --bare https://github.com/paleite/dotfiles.git "${HOME}/.dotfiles/" || .f pull
 
 if .f checkout; then
   echo "Checked out config.";
