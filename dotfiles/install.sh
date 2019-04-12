@@ -8,6 +8,11 @@ set -o nounset
 shopt -s expand_aliases
 alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+################################################################################
+# Run the following command to install
+# /bin/sh -c "$(/usr/bin/curl -fsSL https://raw.githubusercontent.com/paleite/dotfiles/next/dotfiles/install.sh)"
+################################################################################
+
 echo "$(tput bold)dotfiles install$(tput sgr0)"
 
 readonly DIR="${HOME}/dotfiles/"
@@ -46,12 +51,21 @@ then
   ./macos.sh
 
   # Install oh-my-zsh
-  ./oh-my-zsh.sh
+  ZSH=${ZSH:-${HOME}/.oh-my-zsh}
+
+  if ! [ -d "$ZSH" ];
+  then
+    ./oh-my-zsh.sh
+  fi
 
   # Note: This is only to install homebrew. NOT to install its Brewfile
   echo "(Brew) Installing Homebrew"
-  ./brew.sh
+  if ! brew -v >/dev/null;
+  then
+    ./brew.sh
+  fi
 
+  # Sign in to Mac App Store
   brew install mas
   mas account >/dev/null || open -a "App Store"
 
@@ -65,7 +79,7 @@ then
 
   # https://github.com/tj/n/issues/416
   sudo mkdir -p /usr/local/n
-  sudo chown -R $(whoami) /usr/local/n
+  sudo chown -R "$(whoami)" /usr/local/n
 
   # Install latest Node.js
   n latest
@@ -76,8 +90,12 @@ then
   yarn config set yarn-offline-mirror "${TMPDIR}/npm-packages-offline-mirror"
   yarn config set yarn-offline-mirror-pruning true
 
-  echo "(PHP) Installing PHP 7.3"
-  /usr/bin/curl -s https://php-osx.liip.ch/install.sh | /bin/bash -s force 7.2
+  echo "(PHP) Installing PHP ${PHP_VERSION}"
+  readonly PHP_VERSION="7.2"
+  if ! php -v | grep "^PHP ${PHP_VERSION}" >/dev/null;
+  then
+    /usr/bin/curl -s https://php-osx.liip.ch/install.sh | /bin/bash -s force "${PHP_VERSION}"
+  fi
 
   echo "(Ruby) Installing latest ruby dev"
   readonly RUBY_VERSION=$( \
@@ -87,8 +105,13 @@ then
     /usr/bin/sed 's/^ *//' | \
     /usr/bin/tr -d '\n' \
   )
-  # https://github.com/rbenv/ruby-build/issues/1064#issuecomment-289641586
-  RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv install "${RUBY_VERSION}"
+
+  if ! rbenv version | grep -e "^${RUBY_VERSION}" >/dev/null;
+  then
+    # https://github.com/rbenv/ruby-build/issues/1064#issuecomment-289641586
+    RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv install "${RUBY_VERSION}"
+  fi
+
   rbenv global "${RUBY_VERSION}"
   rbenv rehash
 
@@ -130,27 +153,14 @@ fi
 # Cronjobs
 ################################################################################
 
-echo "Installing cronjobs..."
-
+# Install cronjobs
 crontab ./crontab
 
-# Create .extra-file
-[ -e "${HOME}/.extra" ] || touch "${HOME}/.extra"
+################################################################################
+# Post-install
+################################################################################
 
-# Ensure control-directory for .ssh-connections
-mkdir -p "${HOME}/.ssh/control"
+./post-install.sh
 
-echo "Restarting Dock..."
-
-if [ "${OS}" == "Darwin" ]
-then
-  killall Dock
-fi
-
-# Manual steps
-# Once Dropbox has synced:
-# - Restore settings using `mackup restore`
-# - Restore permissions in scripts by running /bin/chmod +x "${HOME}"/*.sh "${HOME}"/dev/*.sh "${HOME}"/cron/*.sh
-# - Restore fonts
-# rsync -rtuv  ~/Library/Fonts/* ~/Dropbox/Mackup/Library/Fonts/
-# rsync -rtuv  ~/Dropbox/Mackup/Library/Fonts/* ~/Library/Fonts/
+echo "$(tput setaf 4)info$(tput sgr0) Some of the changes require a logout/restart to take effect."
+echo "✨  Done."

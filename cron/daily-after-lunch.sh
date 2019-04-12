@@ -21,8 +21,8 @@ brew update
 _title "brew upgrade"
 brew upgrade
 
-_title "brew cask upgrade --greedy"
-brew cask upgrade --greedy
+_title "brew cask upgrade"
+brew cask upgrade
 
 _title "n latest"
 n latest

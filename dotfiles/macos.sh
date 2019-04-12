@@ -960,8 +960,8 @@ for APP in \
   "Tweetbot" \
   "Twitter" \
   ; do
-  killall "${APP}" &> /dev/null && open -a "${APP}" || true
+  # Kill app
+  killall "${APP}" &> /dev/null || continue
+  # If it was killed, restart it
+  open -a "${APP}" >/dev/null 2>&1 || true
 done
-
-echo "$(tput setaf 4)info$(tput sgr0) Some of the changes require a logout/restart to take effect."
-echo "✨  Done."

@@ -31,6 +31,8 @@ brew cleanup -s
 # brew prune # Warning: Calling 'brew prune' is deprecated! Use 'brew cleanup' instead.
 _title "npm cache clean --force"
 npm cache clean --force
+cd "${HOME}"/.npm/_npx || exit 1
+command ls -d -- * | xargs -I {} rm -rf -v "{}"
 _title "yarn cache clean"
 yarn cache clean
 _title "n prune"
@@ -56,6 +58,6 @@ trash -v NELog\ *.log || true
 trash -v amt3\ *.log || true
 trash -v ACC\ *.log || true
 # Folders
-command ls -td CreativeCloud | xargs -I {} trash -v "{}" || true
-command ls -td CSXS | xargs -I {} trash -v "{}" || true
-command ls -td Adobe* | xargs -I {} trash -v "{}" || true
+command ls -d CreativeCloud | xargs -I {} trash -v "{}" || true
+command ls -d CSXS | xargs -I {} trash -v "{}" || true
+command ls -d Adobe* | xargs -I {} trash -v "{}" || true
