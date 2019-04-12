@@ -77,7 +77,7 @@ then
   yarn config set yarn-offline-mirror-pruning true
 
   echo "(PHP) Installing PHP 7.3"
-  /usr/bin/curl -s https://php-osx.liip.ch/install.sh | /bin/bash -s force 7.3
+  /usr/bin/curl -s https://php-osx.liip.ch/install.sh | /bin/bash -s force 7.2
 
   echo "(Ruby) Installing latest ruby dev"
   readonly RUBY_VERSION=$( \
@@ -114,7 +114,7 @@ then
   brew bundle --global --verbose
 
   echo "(Node.js) Installing global packages with Yarn"
-  yarn global upgrade
+  yarn global upgrade || yarn global install
 
   echo "(PHP) Installing global packages with Composer"
   composer global install
