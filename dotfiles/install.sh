@@ -90,8 +90,8 @@ then
   yarn config set yarn-offline-mirror "${TMPDIR}/npm-packages-offline-mirror"
   yarn config set yarn-offline-mirror-pruning true
 
-  echo "(PHP) Installing PHP ${PHP_VERSION}"
   readonly PHP_VERSION="7.2"
+  echo "(PHP) Installing PHP ${PHP_VERSION}"
   if ! php -v | grep "^PHP ${PHP_VERSION}" >/dev/null;
   then
     /usr/bin/curl -s https://php-osx.liip.ch/install.sh | /bin/bash -s force "${PHP_VERSION}"
