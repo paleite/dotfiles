@@ -24,7 +24,4 @@ mkdir -p "${HOME}/.ssh/control"
 /bin/chmod +x "${HOME}"/*.sh "${HOME}"/dev/*.sh "${HOME}"/cron/*.sh
 
 # Restart Dock
-if [ "${OS}" == "Darwin" ]
-then
-  killall Dock
-fi
+killall Dock
