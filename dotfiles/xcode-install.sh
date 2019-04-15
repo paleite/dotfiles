@@ -24,7 +24,7 @@ install_xcode_command_line_tools() {
   # tr removes trailing newline
   PROD=$( \
     sudo /usr/sbin/softwareupdate --list | \
-    /usr/bin/grep -E '^ +\* Command Line Tools' | \
+    /usr/bin/grep --regexp='^ +\* Command Line Tools' | \
     /usr/bin/awk -F'*' '/^ +\\*/ {print $2}' | \
     /usr/bin/sed 's/^ *//' | \
     /usr/bin/tr -d '\n' || \

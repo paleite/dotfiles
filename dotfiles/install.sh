@@ -13,6 +13,20 @@ alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # /bin/sh -c "$(/usr/bin/curl -fsSL https://raw.githubusercontent.com/paleite/dotfiles/next/dotfiles/install.sh)"
 ################################################################################
 
+# TODO:
+# - .oh-my-zsh/custom is in the repo, which prevents oh-my-zsh from installing automatically
+# - Install python dependencies
+# - .ssh-permissions need to be fixed in the postinstall
+# - post install: `cron-gmail` and `is-tethered` need to be linked (yarn link)
+# - fix permissions on gpg-dir: gpg: WARNING: unsafe permissions on homedir '~/.gnupg'
+# Make sure, the folder+contents belong to you:
+# chown -R $(whoami) ~/.gnupg/
+
+# Correct access rights for .gnupg and subfolders:
+# find ~/.gnupg -type f -exec chmod 600 {} \;
+# find ~/.gnupg -type d -exec chmod 700 {} \;
+
+
 echo "$(tput bold)dotfiles install$(tput sgr0)"
 
 readonly DIR="${HOME}/dotfiles/"
@@ -23,10 +37,10 @@ mkdir -p "$DIR"
 cd "$DIR"
 
 # Ask for the administrator password upfront
-sudo -v
+sudo --validate
 
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+while true; do sudo --non-interactive true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 ################################################################################
 # macOS
@@ -60,7 +74,7 @@ then
 
   # Note: This is only to install homebrew. NOT to install its Brewfile
   echo "(Brew) Installing Homebrew"
-  if ! brew -v >/dev/null;
+  if ! brew --version >/dev/null;
   then
     ./brew.sh
   fi
@@ -92,21 +106,21 @@ then
 
   readonly PHP_VERSION="7.2"
   echo "(PHP) Installing PHP ${PHP_VERSION}"
-  if ! php -v | grep "^PHP ${PHP_VERSION}" >/dev/null;
+  if ! php --version | grep "^PHP ${PHP_VERSION}" >/dev/null;
   then
-    /usr/bin/curl -s https://php-osx.liip.ch/install.sh | /bin/bash -s force "${PHP_VERSION}"
+    /usr/bin/curl --silent https://php-osx.liip.ch/install.sh | /bin/bash -s force "${PHP_VERSION}"
   fi
 
   echo "(Ruby) Installing latest ruby dev"
   readonly RUBY_VERSION=$( \
     rbenv install --list | \
-    grep -e '\s\d\.\d\.\d-dev' | \
+    grep --regexp='\s\d\.\d\.\d-dev' | \
     tail -n1 | \
     /usr/bin/sed 's/^ *//' | \
     /usr/bin/tr -d '\n' \
   )
 
-  if ! rbenv version | grep -e "^${RUBY_VERSION}" >/dev/null;
+  if ! rbenv version | grep --regexp="^${RUBY_VERSION}" >/dev/null;
   then
     # https://github.com/rbenv/ruby-build/issues/1064#issuecomment-289641586
     RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv install "${RUBY_VERSION}"
