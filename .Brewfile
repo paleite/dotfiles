@@ -30,6 +30,8 @@ brew "ccat"
 brew "cmake"
 # Color-highlighted diff(1) output
 brew "colordiff"
+# Dependency Manager for PHP
+brew "composer"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Good-lookin' diffs with diff-highlight and more
@@ -84,6 +86,8 @@ brew "n"
 brew "nmap"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
+# Shell command parallelization utility
+brew "parallel", link: false
 # Tool to automatically fix PHP coding standards issues
 brew "php-cs-fixer"
 # Object-relational database system
@@ -153,6 +157,7 @@ cask "quicklook-csv"
 cask "quicklook-json"
 cask "quicklookase"
 cask "sourcetree"
+cask "spectacle"
 cask "spotify"
 cask "spotify-notifications"
 cask "sublime-text"
@@ -161,12 +166,12 @@ cask "webpquicklook"
 cask "whatsapp"
 cask "caskroom/fonts/font-hack-nerd-font"
 cask "paleite/versions/sketch43"
-mas "GlucoGram", id: 1107429772
-mas "JPEGmini", id: 498944723
-mas "Memory Clean 2", id: 1114591412
-mas "Resizer", id: 411277085
-mas "ResolutionTab", id: 540141595
-mas "RSS Bot", id: 605732865
-mas "Slack", id: 803453959
-mas "The Unarchiver", id: 425424353
-mas "Xcode", id: 497799835
+mas "com.apple.dt.Xcode", id: 497799835
+mas "com.bonobolabs.unretina", id: 411277085
+mas "com.fiplab.memoryclean2", id: 1114591412
+mas "com.fiplab.rssbot", id: 605732865
+mas "com.icvt.JPEGmini", id: 498944723
+mas "com.NinetyBytes.GlucoGram", id: 1107429772
+mas "com.shpakovski.mac.RetinaTab", id: 540141595
+mas "com.tinyspeck.slackmacgap", id: 803453959
+mas "cx.c3.theunarchiver", id: 425424353
