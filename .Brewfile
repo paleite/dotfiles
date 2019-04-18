@@ -52,8 +52,6 @@ brew "gawk"
 brew "git"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
-# GNU Pretty Good Privacy (PGP) package
-brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
 # GNU grep, egrep and fgrep
@@ -132,6 +130,7 @@ brew "zsh-syntax-highlighting"
 brew "potatolabs/git-redate/git-redate"
 # A badass zsh theme with more power than a normal earthling
 brew "sambadevi/powerlevel9k/powerlevel9k"
+cask "adobe-creative-cloud"
 cask "cyberduck"
 cask "disk-inventory-x"
 cask "docker"
@@ -140,6 +139,7 @@ cask "flux"
 cask "github"
 cask "google-chrome"
 cask "google-chrome-canary"
+cask "gpg-suite"
 cask "imagealpha"
 cask "imageoptim"
 cask "iterm2"
