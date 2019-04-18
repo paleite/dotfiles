@@ -14,7 +14,6 @@ source .functions
 SCRIPT_PATH="${DIR}/${JOB_NAME}".sh
 if [ -r "$SCRIPT_PATH" ] && [ -x "$SCRIPT_PATH" ];
 then
-  echo "Running cronjob '$*' from '$(pwd)'."
   _title "$JOB_NAME"
   export JOB_NAME
   $SCRIPT_PATH

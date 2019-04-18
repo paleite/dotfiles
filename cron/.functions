@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
 
 function _run_cronjob() {
-  if [[ "${DEBUG:-false}" != 'true' ]] && hash chronic 2>/dev/null; then
-    chronic -v "$@"
+  if [[ "${DEBUG:-false}" != 'true' ]]; then
+    RETVAL=0
+    if OUTPUT=$("$@" 2>&1); then
+      exit
+    else
+      RETVAL=$?
+      echo "${OUTPUT}"
+      echo ""
+      echo "RETVAL: $RETVAL"
+    fi
+    exit $RETVAL
   else
     "$@"
   fi

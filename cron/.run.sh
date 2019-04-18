@@ -10,6 +10,9 @@ set -o nounset
 
 shopt -s expand_aliases
 
+readonly ENVIRONMENT="${ENVIRONMENT:-shell}"
+export ENVIRONMENT
+
 # shellcheck source=cron/.functions
 source "${HOME}"/cron/.functions
 _run_cronjob "${HOME}"/cron/.route.sh "$@" | cron-gmail --subject "[Cron] $*" --tag "cron $*"
