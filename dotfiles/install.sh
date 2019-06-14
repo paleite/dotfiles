@@ -14,15 +14,28 @@ alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 ################################################################################
 
 # TODO:
+# Either do these steps manually or script them.
+#
+# oh-my-zsh:
 # - .oh-my-zsh/custom is in the repo, which prevents oh-my-zsh from installing automatically
-# - Install python dependencies
+# - When installing oh-my-zsh, make sure to do something like `sudo echo "$(which zsh)" >> /etc/shells` in order to be
+#   able to do `chsh -s $(which zsh)`. For more info, see https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH
+#
+# SSH
 # - .ssh-permissions need to be fixed in the postinstall
+#
+# Ruby
+# - When installing bundler `gem install bundler`, it seems ruby doesn't have the permissions to write to its path, so
+#   you need to chown -R "$(whoami)" FOLDERNAME it
+#
+# yarn link
 # - post install: `cron-gmail` and `is-tethered` need to be linked (yarn link)
-# - fix permissions on gpg-dir: gpg: WARNING: unsafe permissions on homedir '~/.gnupg'
-# Make sure, the folder+contents belong to you:
+#
+# GnuPG
+# Make sure the folder+contents belong to user:
 # chown -R $(whoami) ~/.gnupg/
-
-# Correct access rights for .gnupg and subfolders:
+# Fix access rights for .gnupg and subfolders:
+# - fix permissions on gpg-dir: gpg: WARNING: unsafe permissions on homedir '~/.gnupg'
 # find ~/.gnupg -type f -exec chmod 600 {} \;
 # find ~/.gnupg -type d -exec chmod 700 {} \;
 
