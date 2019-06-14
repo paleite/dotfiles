@@ -52,12 +52,14 @@ brew "gawk"
 brew "git"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
+# GNU Pretty Good Privacy (PGP) package
+brew "gnupg", link: false
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
 # GNU grep, egrep and fgrep
 brew "grep"
 # Convert source code to formatted text with syntax highlighting
-brew "highlight"
+brew "highlight", link: false
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
 # Joe's Own Editor (JOE)
@@ -88,10 +90,10 @@ brew "pandoc"
 brew "parallel", link: false
 # Tool to automatically fix PHP coding standards issues
 brew "php-cs-fixer"
+# Pinentry for GPG on Mac
+brew "pinentry-mac"
 # Object-relational database system
 brew "postgresql"
-# Interpreted, interactive, object-oriented programming language
-brew "python@2"
 # Ruby version manager
 brew "rbenv"
 # Persistent key-value database, with built-in net interface
@@ -102,6 +104,8 @@ brew "rename"
 brew "shellcheck"
 # SOund eXchange: universal sound sample translator
 brew "sox"
+# Send macOS User Notifications from the command-line
+brew "terminal-notifier"
 # Granddaddy of HTML tools, with support for modern standards
 brew "tidy-html5"
 # Terminal multiplexer
@@ -161,17 +165,20 @@ cask "spectacle"
 cask "spotify"
 cask "spotify-notifications"
 cask "sublime-text"
+cask "trailer"
 cask "visual-studio-code"
 cask "webpquicklook"
 cask "whatsapp"
+cask "zeplin"
 cask "caskroom/fonts/font-hack-nerd-font"
 cask "paleite/versions/sketch43"
-mas "com.apple.dt.Xcode", id: 497799835
-mas "com.bonobolabs.unretina", id: 411277085
-mas "com.fiplab.memoryclean2", id: 1114591412
-mas "com.fiplab.rssbot", id: 605732865
-mas "com.icvt.JPEGmini", id: 498944723
-mas "com.NinetyBytes.GlucoGram", id: 1107429772
-mas "com.shpakovski.mac.RetinaTab", id: 540141595
-mas "com.tinyspeck.slackmacgap", id: 803453959
-mas "cx.c3.theunarchiver", id: 425424353
+mas "GlucoGram", id: 1107429772
+mas "JPEGmini", id: 498944723
+mas "Memory Clean 2", id: 1114591412
+mas "monday", id: 1298450641
+mas "Resizer", id: 411277085
+mas "ResolutionTab", id: 540141595
+mas "RSS Bot", id: 605732865
+mas "Slack", id: 803453959
+mas "The Unarchiver", id: 425424353
+mas "Xcode", id: 497799835
