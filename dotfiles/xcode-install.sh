@@ -12,7 +12,7 @@ echo "$(tput bold)dotfiles xcode$(tput sgr0)"
 
 # Install Xcode Command Line Tools (adds git, make, etc. needed for homebrew)
 are_xcode_command_line_tools_installed() {
-    xcode-select --print-path &> /dev/null
+    [[ "${FORCE:-false}" != 'true' ]] && xcrun --version >/dev/null 2>&1
 }
 
 install_xcode_command_line_tools() {
@@ -24,7 +24,7 @@ install_xcode_command_line_tools() {
   # tr removes trailing newline
   PROD=$( \
     sudo /usr/sbin/softwareupdate --list | \
-    /usr/bin/grep --regexp='^ +\* Command Line Tools' | \
+    /usr/bin/grep --extended-regexp '^\s+\* Command Line Tools' | \
     /usr/bin/awk -F'*' '/^ +\\*/ {print $2}' | \
     /usr/bin/sed 's/^ *//' | \
     /usr/bin/tr -d '\n' || \
