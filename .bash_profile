@@ -9,3 +9,6 @@ shopt -s dotglob
 bind 'TAB':menu-complete # Automatically take a valid value
 
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+

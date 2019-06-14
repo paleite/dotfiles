@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
@@ -13,5 +15,3 @@ unset file;
 [[ $BASH ]] && [[ -s /usr/local/etc/bash_completion ]] && source /usr/local/etc/bash_completion
 
 # if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi # Very slow and dangerous. Should rbenv ever be compromised, this will grant it access to inject code.
-
-ssh_tmux

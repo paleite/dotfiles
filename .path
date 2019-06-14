@@ -1,9 +1,38 @@
 #!/usr/bin/env bash
 
-export NODE_PATH=/usr/local/lib/node_modules
-export GOPATH=${HOME}/go-get
+function load_goroot() {
+  local _PWD=$1
+  if ! source $_PWD/.path-goroot 2> /dev/null
+  then
+    export GOROOT="$(brew --prefix golang)/libexec";
+    # Create the file in the background
+    (echo "export GOROOT=\"$GOROOT\"" > $_PWD/.path-goroot &) >/dev/null
+  fi
+}
 
-export PATH=/usr/local/sbin:${HOME}/bin:/usr/local/bin:${HOME}/.composer/vendor/bin:/usr/local/php5/bin:${HOME}/go/bin:$PATH
-export PATH=$PATH:/usr/local/opt/go/libexec/bin
+# export PATH="/usr/local/sbin:${HOME}/bin:/usr/local/bin:${HOME}/.composer/vendor/bin:/usr/local/php5/bin:${HOME}/go/bin:$PATH"
+# export PATH="${PATH}:/usr/local/opt/go/libexec/bin"
 
-export PATH="${HOME}/.rbenv/shims:${PATH}"
+# export PATH="${HOME}/.rbenv/shims:${PATH}"
+
+BEFORE=(
+  ${HOME}/.rbenv/shims
+  ${HOME}/.composer/vendor/bin
+  /usr/local/bin
+  /usr/local/sbin
+)
+
+AFTER=(
+  /usr/local/php5/bin
+  ${HOME}/go/bin
+  /usr/local/opt/go/libexec/bin
+)
+
+# IFS=:; echo "BEFORE ${BEFORE[*]}" # WORKING
+IFS=":"; P=("${BEFORE[*]}" "${PATH}" "${AFTER[*]}")
+PATH=$(IFS=":"; echo "${P[*]}")
+export PATH
+
+export NODE_PATH="${HOME}/.config/yarn/global"
+export GOPATH="${HOME}/go"
+load_goroot ${0:a:h}

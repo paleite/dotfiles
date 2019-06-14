@@ -1,6 +1,6 @@
 alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-alias alert='/usr/local/bin/notify -t "$(dirs +0)" -m "Done"; printf "\a"'
+alias alert='/usr/local/bin/terminal-notifier -title "$(dirs +0)" -message "Done" -sound default; printf "\a"'
 alias cat='ccat'
 alias ducks="du -cks * | sort -rn | head"
 alias cgrep='grep --color=always'
