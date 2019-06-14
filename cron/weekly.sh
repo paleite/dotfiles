@@ -11,4 +11,8 @@ cd "${DIR}"
 # shellcheck source=cron/.functions
 source .functions
 
-# _exit_on_tethered
+set -o verbose
+
+_exit_on_tethered
+cd "${HOME}"/dev/Nickelodeon
+yarn run cron

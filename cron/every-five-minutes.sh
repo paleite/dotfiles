@@ -11,4 +11,4 @@ cd "${DIR}"
 # shellcheck source=cron/.functions
 source .functions
 
-exit 127
+"${HOME}/dev/dropbox-backup.sh"

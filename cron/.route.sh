@@ -9,6 +9,7 @@ readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 readonly JOB_NAME=${1:-}
 
 cd "${DIR}"
+# shellcheck source=cron/.functions
 source .functions
 
 SCRIPT_PATH="${DIR}/${JOB_NAME}".sh

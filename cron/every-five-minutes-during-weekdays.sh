@@ -11,4 +11,8 @@ cd "${DIR}"
 # shellcheck source=cron/.functions
 source .functions
 
+set -o verbose
+
 _exit_on_tethered
+cd "${HOME}"/dev/monitor-trustly.com
+NODE_NO_WARNINGS=1 npx babel-node src/index.js --cron

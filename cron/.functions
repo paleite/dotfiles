@@ -18,11 +18,21 @@ function _run_cronjob() {
 }
 
 function _exit_on_tethered() {
-  if is-tethered;
-  then
-    echo "Won't run all of '${JOB_NAME:-$0}' on tethered connection"
-    exit 1
-  fi
+  ERROR_CODE=$(is-tethered || echo $?)
+  case $ERROR_CODE in
+    0)
+      echo "Won't run all of '${JOB_NAME:-$0}' on tethered connection"
+      exit 1
+      ;;
+    128)
+      # It's not tethered; let's do it!
+      return
+      ;;
+    *)
+      echo "Error running 'is-tethered': $?"
+      exit 2
+      ;;
+  esac
 }
 
 function _title() {

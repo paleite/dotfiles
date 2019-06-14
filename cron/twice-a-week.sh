@@ -11,4 +11,6 @@ cd "${DIR}"
 # shellcheck source=cron/.functions
 source .functions
 
+set -o verbose
+
 exit 127

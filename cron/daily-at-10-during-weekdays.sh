@@ -11,4 +11,7 @@ cd "${DIR}"
 # shellcheck source=cron/.functions
 source .functions
 
+set -o verbose
+
 _exit_on_tethered
+"${HOME}"/dev/jekyll-trustly.com/regenerate.command

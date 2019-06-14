@@ -11,9 +11,14 @@ cd "${DIR}"
 # shellcheck source=cron/.functions
 source .functions
 
+set -o verbose
+
 cd "${HOME}"/dev/MacDown-Template
 yarn run build
 _exit_on_tethered
+
+_title "pip-review --local --auto"
+pip-review --local --auto
 
 _title "brew update"
 brew update
@@ -35,10 +40,7 @@ yarn global list outdated
 _title "yarn global upgrade --latest"
 yarn global upgrade --latest
 
-_title "pip-review --local --auto"
-pip-review --local --auto
 # Backup to Dropbox
-cd "${HOME}"/dev
-
 _title "dropbox-backup"
+cd "${HOME}"/dev || exit 1
 ./dropbox-backup.sh

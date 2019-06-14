@@ -11,6 +11,8 @@ cd "${DIR}"
 # shellcheck source=cron/.functions
 source .functions
 
+set -o verbose
+
 _exit_on_tethered
 # Large directories in home:
 # "${HOME}"/dev # Must be handled manually, but there's some cache dirs and node_modules-folders in here. Maybe check for oldest modified folders containing node_modules and remove the node_modules-folder
@@ -26,7 +28,7 @@ brew cleanup -s
 # _title "brew doctor"
 # Brew doctor fails when it has a warning. Maybe better to run this as a separate task
 # brew doctor
-# sudo chown -R patrickaleite $(brew --prefix)/\* # Fix /usr/local not being writable
+# sudo chown -R "$(whoami)" $(brew --prefix)/\* # Fix /usr/local not being writable
 # _title "brew prune"
 # brew prune # Warning: Calling 'brew prune' is deprecated! Use 'brew cleanup' instead.
 _title "npm cache clean --force"

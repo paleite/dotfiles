@@ -26,15 +26,13 @@ TERM=dumb
    2      11        *        *         1-5      ./cron/.run.sh daily-at-11-during-weekdays
    2      13        *        *         *        ./cron/.run.sh daily-after-lunch
    2      15        *        *         1-5      ./cron/.run.sh daily-at-15-during-weekdays
-#  */5     *        *        *         *        ./cron/.run.sh every-five-minutes
+#  *       *        *        *         *        ./cron/.run.sh every-minute
+   */5     *        *        *         *        ./cron/.run.sh every-five-minutes
    */5     9-17     *        *         1-5      ./cron/.run.sh every-five-minutes-during-weekdays
 # 15       *        *        *         *        ./cron/.run.sh every-hour
 # 20      17,18     *        *         1-5      ./cron/.run.sh twice-during-weekdays
 #  0       0        *        *         0        ./cron/.run.sh twice-a-week
-#  7      13        *        *         2        ./cron/.run.sh weekly
    7      13        *        *         2        ./cron/.run.sh weekly
 #  0       0        *        *         4        ./cron/.run.sh twice-a-week
-#  2      13        1        *         *        ./cron/.run.sh monthly
    2      13        1        *         *        ./cron/.run.sh monthly
-#  */15    *        *        *         *        ./bin/temp-help.sh
 #==============================================================================#
