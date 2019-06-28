@@ -17,4 +17,16 @@ _exit_on_tethered
 cd "${HOME}"/dev/monitor-trustly.com
 NODE_NO_WARNINGS=1 npx babel-node src/index.js --reset
 NODE_NO_WARNINGS=1 npx babel-node src/index.js --quiet
-"${HOME}"/dev/docpad-trustly.com/regenerate.command
+
+cd "${HOME}"/dev/docpad-trustly.com/
+
+#### Updated to latest version
+git checkout HEAD^
+git checkout -f master
+git reset --hard
+git clean -df
+git pull || true
+
+#### Generate the site
+yarn run build
+alert

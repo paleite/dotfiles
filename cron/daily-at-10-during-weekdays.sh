@@ -14,4 +14,27 @@ source .functions
 set -o verbose
 
 _exit_on_tethered
-"${HOME}"/dev/jekyll-trustly.com/regenerate.command
+cd "${HOME}"/dev/jekyll-trustly.com/
+
+#### Updated to latest version
+git checkout HEAD^
+git checkout -f master
+git reset --hard
+git pull || true
+
+### Update dependencies
+yarn install
+
+###
+git add *.lock
+git commit -S -m 'Update lockfiles' && open -a /Applications/SourceTree.app . || true
+
+#### Generate the site
+yarn run production || yarn run production
+
+###
+git add .
+git add -f ./dist/
+git reset './dist/**/.*'
+git commit -S -m 'Generate production' && open -a /Applications/SourceTree.app . || true
+alert

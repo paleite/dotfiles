@@ -1,13 +1,22 @@
 #!/usr/bin/env bash
 
+function alert() {
+  ALERT_TITLE="${1:-}"
+  ALERT_MESSAGE="${2:-}"
+  /usr/local/bin/terminal-notifier -title "${ALERT_TITLE}" -message "${ALERT_MESSAGE}" -sound default
+}
+
 function _run_cronjob() {
   if [[ "${DEBUG:-false}" != 'true' ]]; then
     RETVAL=0
     if OUTPUT=$("$@" 2>&1); then
       exit
     else
+      alert "${@//${HOME}/\\~}" "Error"
       RETVAL=$?
       echo "${OUTPUT}"
+      echo "ENV:"
+      env
       echo ""
       echo "RETVAL: $RETVAL"
     fi

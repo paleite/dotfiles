@@ -8,8 +8,6 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-shopt -s expand_aliases
-
 readonly ENVIRONMENT="${ENVIRONMENT:-shell}"
 export ENVIRONMENT
 
