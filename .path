@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function load_goroot() {
-  local _PWD=$1
+  local _PWD=${HOME}
   if ! source $_PWD/.path-goroot 2> /dev/null
   then
     export GOROOT="$(brew --prefix golang)/libexec";
@@ -35,4 +35,4 @@ export PATH
 
 export NODE_PATH="${HOME}/.config/yarn/global"
 export GOPATH="${HOME}/go"
-load_goroot ${0:a:h}
+load_goroot
