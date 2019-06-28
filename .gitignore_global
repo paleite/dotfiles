@@ -45,3 +45,4 @@ node_modules*/
 # Keep folders
 !/**/.gitkeep
 /.sync
+.eslintcache
