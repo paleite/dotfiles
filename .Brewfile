@@ -1,3 +1,4 @@
+tap "adoptopenjdk/openjdk"
 tap "adtennant/tilengine"
 tap "caskroom/fonts"
 tap "danielbayley/adobe"
@@ -10,6 +11,8 @@ tap "jonof/kenutils"
 tap "paleite/versions"
 tap "potatolabs/git-redate"
 tap "sambadevi/powerlevel9k"
+cask "adoptopenjdk"
+cask "adoptopenjdk8"
 # Tool for reverse engineering 3rd party, closed, binary Android apps
 brew "apktool"
 # MPEG-4 command-line tool
@@ -28,12 +31,16 @@ brew "cairo"
 brew "ccat"
 # Cross-platform make
 brew "cmake"
+# Dependency manager for Cocoa projects
+brew "cocoapods"
 # Color-highlighted diff(1) output
 brew "colordiff"
 # Dependency Manager for PHP
 brew "composer"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Tools to work with Android .dex and Java .class files
+brew "dex2jar"
 # Good-lookin' diffs with diff-highlight and more
 brew "diff-so-fancy"
 # Perl lib for reading and writing EXIF metadata
@@ -48,6 +55,8 @@ brew "fftw"
 brew "findutils"
 # GNU awk utility
 brew "gawk"
+# Google Drive CLI Client
+brew "gdrive"
 # Distributed revision control system
 brew "git"
 # GNU implementation of the famous stream editor
@@ -62,6 +71,8 @@ brew "grep"
 brew "highlight", link: false
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
+# Dex to Java decompiler
+brew "jadx"
 # Joe's Own Editor (JOE)
 brew "joe"
 # Lightweight and flexible command-line JSON processor
@@ -77,7 +88,7 @@ brew "mackup"
 # Mac App Store command-line interface
 brew "mas"
 # Collection of tools that nobody wrote when UNIX was young
-brew "moreutils"
+brew "moreutils", link: false
 # MP3 player for Linux and UNIX
 brew "mpg123"
 # Node version management
@@ -86,8 +97,6 @@ brew "n"
 brew "nmap"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
-# Shell command parallelization utility
-brew "parallel", link: false
 # Tool to automatically fix PHP coding standards issues
 brew "php-cs-fixer"
 # Pinentry for GPG on Mac
@@ -114,8 +123,12 @@ brew "tmux"
 brew "trash"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Secures, stores, and tightly controls access to secrets
+brew "vault"
 # Executes a program periodically, showing output fullscreen
 brew "watch"
+# Watch files and take action when they change
+brew "watchman"
 # Display word differences between text files
 brew "wdiff"
 # Internet file retriever
@@ -135,6 +148,8 @@ brew "potatolabs/git-redate/git-redate"
 # A badass zsh theme with more power than a normal earthling
 brew "sambadevi/powerlevel9k/powerlevel9k"
 cask "adobe-creative-cloud"
+cask "betterzip"
+cask "charles"
 cask "cyberduck"
 cask "disk-inventory-x"
 cask "docker"
@@ -150,7 +165,9 @@ cask "iterm2"
 cask "lulu"
 cask "macdown"
 cask "majestic"
+cask "mjml"
 cask "notable"
+cask "postman"
 cask "qlcolorcode"
 cask "qlimagesize"
 cask "qlmarkdown"
@@ -166,6 +183,7 @@ cask "spotify"
 cask "spotify-notifications"
 cask "sublime-text"
 cask "trailer"
+cask "tunnelblick"
 cask "visual-studio-code"
 cask "webpquicklook"
 cask "whatsapp"
