@@ -29,3 +29,141 @@ ssh_tmux() {
     tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
   fi
 }
+
+
+stepper() {
+  # Usage guidelines
+  #
+  # - Wrap the step-prefix with brackets and show the progress: "[ 5/10]"
+  # - End step-messages with three dots (not an ellipsis)
+  # - End ending messages (error, success, info, warn) with '.'
+  # - 😃  Have an emoji in the beginning of the message
+  # - Use double-spaces after each emoji, so it looks better in the terminal
+  # - Start a stepper with `echo "$(tput bold)title$(tput sgr0)"`
+  # - End a stepper with `echo "✨  Done."`
+  #
+  # An example:
+  # $(tput bold)title$(tput sgr0)"
+  # stepper default "[1/3]" "🚚  Fetching dependencies..." 'npx concurrently --names "1/3: brew fetch,1/3: cask fetch" --prefix-colors "grey" "brew fetch composer php-cs-fixer" "brew cask fetch docker";'
+  # stepper default "[2/3]" "🔗  Linking dependencies..." 'brew install composer php-cs-fixer; brew cask install docker; composer install;'
+  # stepper default "[3/3]" "🐳  Building docker image..." 'docker-compose build;'
+  # stepper success "success" "Success message."
+  #
+  # echo "✨  Done."
+
+  colors_default="8"
+  colors_error="1"
+  colors_success="2"
+  colors_info="4"
+  colors_warn="3"
+
+  color="colors_$1"
+  shift
+
+  prefix="$1"
+  shift
+
+  message="$1"
+  shift
+
+  echo "$(tput setaf ${!color})$prefix$(tput sgr0) ${message}"
+  if ! SUPPRESSED=$( (eval $@) 2>&1)
+  then
+    echo "$SUPPRESSED"
+    exit 1
+  fi
+}
+
+function _alert() {
+  _ALERT_TYPE="${1:-success}"
+  _ALERT_TITLE="${2:-Alert}"
+  _ALERT_GROUP="${ALERT_GROUP_ID:-}"
+
+  TERMINAL_NOTIFIER_OPTIONS=()
+
+  _ALERT_MESSAGE="${3:-}"
+
+  if [[ "${_ALERT_MESSAGE}" != "" ]]; then
+    TERMINAL_NOTIFIER_OPTIONS+=(-title "${_ALERT_TITLE}")
+    TERMINAL_NOTIFIER_OPTIONS+=(-message "${_ALERT_MESSAGE}")
+  else
+    TERMINAL_NOTIFIER_OPTIONS+=(-message "${_ALERT_TITLE}")
+  fi
+
+  case "${_ALERT_TYPE}" in
+    success)
+      _ALERT_TITLE="${2:-Success}"
+      TERMINAL_NOTIFIER_OPTIONS+=(-sound default)
+      TERMINAL_NOTIFIER_OPTIONS+=(-appIcon ~/dotfiles/assets/success.png)
+      ;;
+
+    warn)
+      _ALERT_TITLE="${2:-Warning}"
+      TERMINAL_NOTIFIER_OPTIONS+=(-sound Funk)
+      TERMINAL_NOTIFIER_OPTIONS+=(-appIcon ~/dotfiles/assets/warn.png)
+      ;;
+
+    error)
+      _ALERT_TITLE="${2:-Error}"
+      TERMINAL_NOTIFIER_OPTIONS+=(-sound Basso)
+      TERMINAL_NOTIFIER_OPTIONS+=(-appIcon ~/dotfiles/assets/error.png)
+      ;;
+  esac
+
+  if [[ "${_ALERT_GROUP}" == "" ]]; then
+    TERMINAL_NOTIFIER_OPTIONS+=(-group "$(tty)")
+  else
+    TERMINAL_NOTIFIER_OPTIONS+=(-group "${_ALERT_GROUP}")
+  fi
+
+  echo "${_ALERT_TITLE}: ${_ALERT_MESSAGE}"
+  /usr/local/bin/terminal-notifier "${TERMINAL_NOTIFIER_OPTIONS[@]:-}"
+}
+
+function success() {
+  _alert "success" "$@"
+}
+
+function warn() {
+  _alert "warn" "$@"
+}
+
+function error() {
+  _alert "error" "$@"
+}
+
+function check_upstream() {
+  set -o pipefail
+
+  local -r _OLD_PWD="$(pwd)"
+  local -r _NEW_PWD="${1:-$(pwd)}"
+  local -r REPO_NAME=$(basename "${_NEW_PWD}")
+  local _RETURN_CODE=0
+  if ! cd "${_NEW_PWD}" || ! git fetch --all --prune >/dev/null; then
+    _RETURN_CODE=2
+  fi
+
+  if [[ $_RETURN_CODE -eq 0 && "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]]; then
+    readonly ALERT_GROUP_ID=$(echo -n "${_NEW_PWD}" | md5sum | cut -f1 -d" ")
+    export ALERT_GROUP_ID
+    warn "${REPO_NAME}" "${REPO_NAME} is not in sync with upstream";
+    _RETURN_CODE=1
+  fi
+
+  cd "${_OLD_PWD}"
+  return "${_RETURN_CODE}"
+}
+
+function start() {
+  # Open all folders in .projects
+  PROJECTS_LIST_FILE="${HOME}"/dev/.projects
+  cd $(dirname "${PROJECTS_LIST_FILE}") || return 1
+  grep -E '^[^#]' < "${PROJECTS_LIST_FILE}" | xargs -n1 code
+}
+
+wait_for_jobs() {
+  for job in `jobs -p`;
+  do
+    wait "${job}";
+  done;
+}

@@ -14,7 +14,33 @@
       "router": true,
       "vuex": true,
       "cssPreprocessor": "sass"
+    },
+    "typescript-2019-07-18": {
+      "useConfigFiles": true,
+      "plugins": {
+        "@vue/cli-plugin-babel": {},
+        "@vue/cli-plugin-typescript": {
+          "classComponent": true,
+          "useTsWithBabel": true
+        },
+        "@vue/cli-plugin-pwa": {},
+        "@vue/cli-plugin-eslint": {
+          "config": "prettier",
+          "lintOn": [
+            "save",
+            "commit"
+          ]
+        },
+        "@vue/cli-plugin-unit-jest": {},
+        "@vue/cli-plugin-e2e-cypress": {}
+      },
+      "router": true,
+      "routerHistoryMode": true,
+      "vuex": true,
+      "cssPreprocessor": "dart-sass"
     }
   },
-  "useTaobaoRegistry": false
+  "useTaobaoRegistry": false,
+  "latestVersion": "3.9.3",
+  "lastChecked": 1563454957081
 }
