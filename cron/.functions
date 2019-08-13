@@ -12,9 +12,10 @@ function _run_cronjob() {
     if OUTPUT=$("$@" 2>&1); then
       exit
     else
-      alert "${@//${HOME}/\\~}" "Error"
       RETVAL=$?
+      alert "${@//${HOME}/\\~}" "Error"
       echo "${OUTPUT}"
+      echo ""
       echo "ENV:"
       env
       echo ""
@@ -48,7 +49,10 @@ function _title() {
   local COLUMNS
   COLUMNS=$(tput cols)
   COLUMNS="${COLUMNS:-80}"
-  echo "=≡☰ ${*} ☰≡=" | awk '{L = '"${COLUMNS}"' - length; for(i=1; i<=int(L/2); i++) {printf "-";} printf "%s", $0; for(i=1; i<=int(L/2+.5); i++) {printf "-";}printf "\n";}'
+  if [[ $ENVIRONMENT = 'cron' ]]; then
+    COLUMNS=33
+  fi
+  echo "=≡☰ ${*} ☰≡=" | awk '{L = '"${COLUMNS}"' - length; for(i=1; i<=int(L/2); i++) {printf "-";} printf "%s", $0; for(i=1; i<=int(L/2-.5); i++) {printf "-";}printf "\n";}'
 }
 
 function _print_shortlist() {
