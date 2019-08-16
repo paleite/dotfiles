@@ -39,10 +39,14 @@ Thumbs.db
 
 # CUSTOM #
 ##########
+.eslintcache
+/.cache/
+/.sync
+/.vscode/
+/coverage/
 /gitignore/
+/icon.png
 node_modules*/
 
 # Keep folders
 !/**/.gitkeep
-/.sync
-.eslintcache

@@ -2,11 +2,19 @@
 
 function load_goroot() {
   local _PWD=${HOME}
-  if ! source $_PWD/.path-goroot 2> /dev/null
-  then
-    export GOROOT="$(brew --prefix golang)/libexec";
+  if ! source $_PWD/.path-goroot 2>/dev/null; then
+    export GOROOT="$(brew --prefix golang)/libexec"
     # Create the file in the background
-    (echo "export GOROOT=\"$GOROOT\"" > $_PWD/.path-goroot &) >/dev/null
+    (echo "export GOROOT=\"$GOROOT\"" >$_PWD/.path-goroot &) >/dev/null
+  fi
+}
+
+function load_javahome() {
+  local _PWD=${HOME}
+  if ! source $_PWD/.path-javahome 2>/dev/null; then
+    export JAVA_HOME="$(/usr/libexec/java_home)"
+    # Create the file in the background
+    (echo "export JAVA_HOME=\"$JAVA_HOME\"" >$_PWD/.path-javahome &) >/dev/null
   fi
 }
 
@@ -28,11 +36,15 @@ AFTER=(
   /usr/local/opt/go/libexec/bin
 )
 
-# IFS=:; echo "BEFORE ${BEFORE[*]}" # WORKING
-IFS=":"; P=("${BEFORE[*]}" "${PATH}" "${AFTER[*]}")
-PATH=$(IFS=":"; echo "${P[*]}")
+IFS=":"
+P=("${BEFORE[*]}" "${PATH}" "${AFTER[*]}")
+PATH=$(
+  IFS=":"
+  echo "${P[*]}"
+)
 export PATH
 
 export NODE_PATH="${HOME}/.config/yarn/global"
 export GOPATH="${HOME}/go"
 load_goroot
+load_javahome
