@@ -40,6 +40,9 @@ Thumbs.db
 # CUSTOM #
 ##########
 .eslintcache
+.php_cs.cache
+.stylelintcache
+*.bak
 /.cache/
 /.sync
 /.vscode/

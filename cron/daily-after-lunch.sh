@@ -10,24 +10,19 @@ readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 cd "${DIR}"
 # shellcheck source=cron/.functions
 source .functions
+source ~/.functions
 
 set -o verbose
 
+# Backup to Dropbox
+_title "dropbox-backup"
+cd "${HOME}"/dev
+./dropbox-backup.sh
+
 cd "${HOME}"/dev/MacDown-Template
 yarn run build
+
 _exit_on_tethered
-
-_title "pip-review --local --auto"
-pip-review --local --auto
-
-_title "brew update"
-brew update
-
-_title "brew upgrade"
-brew upgrade
-
-_title "brew cask upgrade"
-brew cask upgrade
 
 _title "n latest"
 n latest
@@ -40,7 +35,14 @@ yarn global list outdated
 _title "yarn global upgrade --latest"
 yarn global upgrade --latest
 
-# Backup to Dropbox
-_title "dropbox-backup"
-cd "${HOME}"/dev || exit 1
-./dropbox-backup.sh
+_title "brew update"
+brew update
+
+_title "brew upgrade"
+brew upgrade &
+
+_title "brew cask upgrade"
+brew cask upgrade &
+
+_title "pip-review --local --auto"
+pip-review --local --auto

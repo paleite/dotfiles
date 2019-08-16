@@ -11,7 +11,6 @@ tap "jonof/kenutils"
 tap "paleite/versions"
 tap "potatolabs/git-redate"
 tap "sambadevi/powerlevel9k"
-# cask "adoptopenjdk"
 cask "adoptopenjdk8"
 # Tool for reverse engineering 3rd party, closed, binary Android apps
 brew "apktool"
