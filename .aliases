@@ -1,4 +1,4 @@
-alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias .f='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias alert='/usr/local/bin/terminal-notifier -title "${PWD//${HOME}/\~}" -message "${ALERT_MESSAGE:-Done}" -sound default; printf "\a"'
 alias cat='ccat'
