@@ -14,15 +14,14 @@ source ~/.functions
 
 set -o verbose
 
-# Backup to Dropbox
-_title "dropbox-backup"
-cd "${HOME}"/dev
-./dropbox-backup.sh
-
+_title "MacDown-Template"
 cd "${HOME}"/dev/MacDown-Template
 yarn run build
 
 _exit_on_tethered
+
+_title "mas upgrade"
+mas upgrade
 
 _title "n latest"
 n latest

@@ -6,9 +6,9 @@ shopt -s extglob
 shopt -s dotglob
 
 # Improve Bash Tab-behavior
-bind 'TAB':menu-complete # Automatically take a valid value
+# Automatically take a valid value
+bind 'TAB':menu-complete
 
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-

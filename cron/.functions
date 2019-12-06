@@ -30,18 +30,18 @@ function _run_cronjob() {
 function _exit_on_tethered() {
   ERROR_CODE=$(is-tethered || echo $?)
   case $ERROR_CODE in
-    0)
-      echo "Won't run all of '${JOB_NAME:-$0}' on tethered connection"
-      exit 1
-      ;;
-    128)
-      # It's not tethered; let's do it!
-      return
-      ;;
-    *)
-      echo "Error running 'is-tethered': $?"
-      exit 2
-      ;;
+  0)
+    echo "Won't run all of '${JOB_NAME:-$0}' on tethered connection"
+    exit 1
+    ;;
+  128)
+    # It's not tethered; let's do it!
+    return
+    ;;
+  *)
+    echo "Error running 'is-tethered': $?"
+    exit 2
+    ;;
   esac
 }
 
@@ -49,7 +49,7 @@ function _title() {
   local COLUMNS
   COLUMNS=$(tput cols)
   COLUMNS="${COLUMNS:-80}"
-  if [[ $ENVIRONMENT = 'cron' ]]; then
+  if [[ ${ENVIRONMENT:-} == 'cron' ]]; then
     COLUMNS=33
   fi
   echo "=≡☰ ${*} ☰≡=" | awk '{L = '"${COLUMNS}"' - length; for(i=1; i<=int(L/2); i++) {printf "-";} printf "%s", $0; for(i=1; i<=int(L/2-.5); i++) {printf "-";}printf "\n";}'
@@ -58,11 +58,9 @@ function _title() {
 function _print_shortlist() {
   cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
   SHORTLIST=()
-  for i in *.sh;
-  do
+  for i in *.sh; do
     SCRIPT_PATH="${i}"
-    if [ -r "$SCRIPT_PATH" ] && [ -x "$SCRIPT_PATH" ];
-    then
+    if [ -r "$SCRIPT_PATH" ] && [ -x "$SCRIPT_PATH" ]; then
       SHORTLIST+=("${i%.sh}")
     fi
   done

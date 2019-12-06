@@ -45,11 +45,12 @@ Thumbs.db
 *.bak
 /.cache/
 /.sync
-/.vscode/
+/.vscode/settings.json
 /coverage/
 /gitignore/
 /icon.png
 node_modules*/
+.gradle/
 
 # Keep folders
 !/**/.gitkeep

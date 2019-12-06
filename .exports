@@ -14,3 +14,14 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
 # Lang
 export LANG=en_US.UTF-8
+
+# Use Yarn instead of npm with Husky
+export HUSKY_USE_YARN=true
+
+# Opt-out from telemetry
+## AWS SAM
+export SAM_CLI_TELEMETRY=0
+## Cypress
+export CYPRESS_CRASH_REPORTS=0
+## Homebrew
+export HOMEBREW_NO_ANALYTICS=1

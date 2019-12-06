@@ -39,7 +39,6 @@ alias .f='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # find ~/.gnupg -type f -exec chmod 600 {} \;
 # find ~/.gnupg -type d -exec chmod 700 {} \;
 
-
 echo "$(tput bold)dotfiles install$(tput sgr0)"
 
 readonly DIR="${HOME}/dotfiles/"
@@ -53,7 +52,11 @@ cd "$DIR"
 sudo --validate
 
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
-while true; do sudo --non-interactive true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+while true; do
+  sudo --non-interactive true
+  sleep 60
+  kill -0 "$$" || exit
+done 2>/dev/null &
 
 ################################################################################
 # macOS
@@ -63,8 +66,7 @@ while true; do sudo --non-interactive true; sleep 60; kill -0 "$$" || exit; done
 # - find my mac
 ################################################################################
 
-if [ "${OS}" == "Darwin" ]
-then
+if [ "${OS}" == "Darwin" ]; then
   # Install software (e.g. git, make, etc.)
   # ./xcode-install.sh
   /bin/sh -c "$(/usr/bin/curl -fsSL https://raw.githubusercontent.com/paleite/dotfiles/next/dotfiles/xcode-install.sh)"
@@ -72,23 +74,20 @@ fi
 
 /bin/sh -c "$(/usr/bin/curl -fsSL https://raw.githubusercontent.com/paleite/dotfiles/next/dotfiles/clone.sh)"
 
-if [ "${OS}" == "Darwin" ]
-then
+if [ "${OS}" == "Darwin" ]; then
   # Change default settings
   ./macos.sh
 
   # Install oh-my-zsh
   ZSH=${ZSH:-${HOME}/.oh-my-zsh}
 
-  if ! [ -d "$ZSH" ];
-  then
+  if ! [ -d "$ZSH" ]; then
     ./oh-my-zsh.sh
   fi
 
   # Note: This is only to install homebrew. NOT to install its Brewfile
   echo "(Brew) Installing Homebrew"
-  if ! brew --version >/dev/null;
-  then
+  if ! brew --version >/dev/null; then
     ./brew.sh
   fi
 
@@ -116,25 +115,25 @@ then
   #€ Mirror packages offline
   yarn config set yarn-offline-mirror "${TMPDIR}/npm-packages-offline-mirror"
   yarn config set yarn-offline-mirror-pruning true
+  yarn config set init-author-url "https://github.com/paleite"
+  yarn config set init-private true
 
   readonly PHP_VERSION="7.2"
   echo "(PHP) Installing PHP ${PHP_VERSION}"
-  if ! php --version | grep "^PHP ${PHP_VERSION}" >/dev/null;
-  then
+  if ! php --version | grep "^PHP ${PHP_VERSION}" >/dev/null; then
     /usr/bin/curl --silent https://php-osx.liip.ch/install.sh | /bin/bash -s force "${PHP_VERSION}"
   fi
 
   echo "(Ruby) Installing latest ruby dev"
-  readonly RUBY_VERSION=$( \
-    rbenv install --list | \
-    grep --regexp='\s\d\.\d\.\d-dev' | \
-    tail -n1 | \
-    /usr/bin/sed 's/^ *//' | \
-    /usr/bin/tr -d '\n' \
+  readonly RUBY_VERSION=$(
+    rbenv install --list |
+      grep --regexp='\s\d\.\d\.\d-dev' |
+      tail -n1 |
+      /usr/bin/sed 's/^ *//' |
+      /usr/bin/tr -d '\n'
   )
 
-  if ! rbenv version | grep --regexp="^${RUBY_VERSION}" >/dev/null;
-  then
+  if ! rbenv version | grep --regexp="^${RUBY_VERSION}" >/dev/null; then
     # https://github.com/rbenv/ruby-build/issues/1064#issuecomment-289641586
     RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv install "${RUBY_VERSION}"
   fi
@@ -157,8 +156,7 @@ fi
 # - which apps are installed?
 ################################################################################
 
-if [ "${OS}" == "Darwin" ]
-then
+if [ "${OS}" == "Darwin" ]; then
   # Install Homebrew kegs and Mac App Store apps
   echo "(Brew) Installing Homebrew kegs and Mac App Store apps..."
   brew bundle --global --verbose

@@ -1,11 +1,11 @@
 # Get the git branch of the current folder (useful in PS1)
 function parse_git_branch() {
-	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+  git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
 # Kill the process that listens on specific port
 function killport() {
-  lsof -i TCP:$1 | grep LISTEN | awk '{print $2}' | xargs kill -9;
+  lsof -i TCP:$1 | grep LISTEN | awk '{print $2}' | xargs kill -9
 }
 
 function _yarnhook() {
@@ -14,8 +14,8 @@ function _yarnhook() {
   for i in ${YARN_FILES[*]}; do
     if [[ -s $i ]]; then
       # HAS_FOUND=1;
-      yarn install;
-      break;
+      yarn install
+      break
     fi
   done
 
@@ -29,7 +29,6 @@ ssh_tmux() {
     tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
   fi
 }
-
 
 stepper() {
   # Usage guidelines
@@ -67,8 +66,7 @@ stepper() {
   shift
 
   echo "$(tput setaf ${!color})$prefix$(tput sgr0) ${message}"
-  if ! SUPPRESSED=$( (eval $@) 2>&1)
-  then
+  if ! SUPPRESSED=$( (eval $@) 2>&1); then
     echo "$SUPPRESSED"
     exit 1
   fi
@@ -91,23 +89,23 @@ function _alert() {
   fi
 
   case "${_ALERT_TYPE}" in
-    success)
-      _ALERT_TITLE="${2:-Success}"
-      TERMINAL_NOTIFIER_OPTIONS+=(-sound default)
-      TERMINAL_NOTIFIER_OPTIONS+=(-appIcon ~/dotfiles/assets/success.png)
-      ;;
+  success)
+    _ALERT_TITLE="${2:-Success}"
+    TERMINAL_NOTIFIER_OPTIONS+=(-sound default)
+    TERMINAL_NOTIFIER_OPTIONS+=(-appIcon ~/dotfiles/assets/success.png)
+    ;;
 
-    warn)
-      _ALERT_TITLE="${2:-Warning}"
-      TERMINAL_NOTIFIER_OPTIONS+=(-sound Funk)
-      TERMINAL_NOTIFIER_OPTIONS+=(-appIcon ~/dotfiles/assets/warn.png)
-      ;;
+  warn)
+    _ALERT_TITLE="${2:-Warning}"
+    TERMINAL_NOTIFIER_OPTIONS+=(-sound Funk)
+    TERMINAL_NOTIFIER_OPTIONS+=(-appIcon ~/dotfiles/assets/warn.png)
+    ;;
 
-    error)
-      _ALERT_TITLE="${2:-Error}"
-      TERMINAL_NOTIFIER_OPTIONS+=(-sound Basso)
-      TERMINAL_NOTIFIER_OPTIONS+=(-appIcon ~/dotfiles/assets/error.png)
-      ;;
+  error)
+    _ALERT_TITLE="${2:-Error}"
+    TERMINAL_NOTIFIER_OPTIONS+=(-sound Basso)
+    TERMINAL_NOTIFIER_OPTIONS+=(-appIcon ~/dotfiles/assets/error.png)
+    ;;
   esac
 
   if [[ "${_ALERT_GROUP}" == "" ]]; then
@@ -146,7 +144,7 @@ function check_upstream() {
   if [[ $_RETURN_CODE -eq 0 && "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]]; then
     readonly ALERT_GROUP_ID=$(echo -n "${_NEW_PWD}" | md5sum | cut -f1 -d" ")
     export ALERT_GROUP_ID
-    warn "${REPO_NAME}" "${REPO_NAME} is not in sync with upstream";
+    warn "${REPO_NAME}" "${REPO_NAME} is not in sync with upstream"
     _RETURN_CODE=1
   fi
 
@@ -158,12 +156,19 @@ function start() {
   # Open all folders in .projects
   PROJECTS_LIST_FILE="${HOME}"/dev/.projects
   cd $(dirname "${PROJECTS_LIST_FILE}") || return 1
-  grep -E '^[^#]' < "${PROJECTS_LIST_FILE}" | xargs -n1 code
+  grep -E '^[^#]' <"${PROJECTS_LIST_FILE}" | xargs -n1 code
 }
 
-wait_for_jobs() {
-  for job in `jobs -p`;
-  do
-    wait "${job}";
-  done;
+function wait_for_jobs() {
+  for job in $(jobs -p); do
+    wait "${job}"
+  done
+}
+
+function _open_project() {
+  local readonly DIR="$1"
+  {
+    open -a /Applications/iTerm.app "$1" &
+    code "$1" &
+  } >/dev/null
 }
