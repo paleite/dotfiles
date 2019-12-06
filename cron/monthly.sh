@@ -32,9 +32,11 @@ brew cleanup -s
 # _title "brew prune"
 # brew prune # Warning: Calling 'brew prune' is deprecated! Use 'brew cleanup' instead.
 _title "npm cache clean --force"
-npm cache clean --force
+{
+  npm cache clean --force
 cd "${HOME}"/.npm/_npx || exit 1
 command ls -d -- * | xargs -I {} rm -rf -v "{}"
+} || true
 _title "yarn cache clean"
 yarn cache clean
 _title "n prune"
@@ -50,7 +52,10 @@ command ls -t | tail -n +5 | xargs -I {} trash -v "{}"
 _title "Prune CoreSimulator images"
 # NB: If you get 'xcrun: error: unable to find utility "simctl", not a developer tool or in PATH', try adding
 # Command Line Tools in Xcode: Preferences > Locations > Locations > Command Line Tools
-xcrun simctl delete unavailable
+xcrun simctl delete unavailable || {
+  echo "⚠️  If you get 'xcrun: error: unable to find utility \"simctl\", not a developer tool or in PATH', try adding"
+  echo "Command Line Tools in Xcode: Preferences > Locations > Locations > Command Line Tools"
+}
 _title "Delete Adobe logs"
 cd "${HOME}"/Library/Logs/ || exit 1
 # Files
