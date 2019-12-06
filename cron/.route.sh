@@ -13,8 +13,7 @@ cd "${DIR}"
 source .functions
 
 SCRIPT_PATH="${DIR}/${JOB_NAME}".sh
-if [ -r "$SCRIPT_PATH" ] && [ -x "$SCRIPT_PATH" ];
-then
+if [ -r "$SCRIPT_PATH" ] && [ -x "$SCRIPT_PATH" ]; then
   _title "$JOB_NAME"
   export JOB_NAME
   $SCRIPT_PATH
@@ -24,4 +23,4 @@ else
 Available options are:
 $(_print_shortlist)"
   exit 1
-fi;
+fi

@@ -19,6 +19,6 @@ _exit_on_tethered
 PROJECTS_LIST_FILE="${HOME}"/dev/.projects
 cd $(dirname "${PROJECTS_LIST_FILE}")
 
-for PROJECT_DIR in `grep -E '^[^#]' < "${PROJECTS_LIST_FILE}"`; do
-    check_upstream "${PROJECT_DIR}" &
-done < $PROJECTS_LIST_FILE
+for PROJECT_DIR in $(grep -E '^[^#]' <"${PROJECTS_LIST_FILE}"); do
+  check_upstream "${PROJECT_DIR}" &
+done <$PROJECTS_LIST_FILE

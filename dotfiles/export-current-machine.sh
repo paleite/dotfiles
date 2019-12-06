@@ -19,7 +19,7 @@ echo "Brew: Dump Brewfile"
 ./export-brewfile.sh
 
 echo "Mackup: Backup"
-mackup backup --force --verbose # Backup current setup to Dropbox (creates symlinks to the Dropbox-folder)
+mackup backup --force --verbose                                     # Backup current setup to Dropbox (creates symlinks to the Dropbox-folder)
 # mackup restore --force --verbose # Install on a new computer (restore symlinks from previous computer)
 # mackup uninstall --force --verbose # Restore files from symlinks (Uninstall Mackup)
 /bin/chmod +x "${HOME}"/*.sh "${HOME}"/dev/*.sh "${HOME}"/cron/*.sh # Fix Mackup's permissions bug

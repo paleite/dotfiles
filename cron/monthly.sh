@@ -34,8 +34,8 @@ brew cleanup -s
 _title "npm cache clean --force"
 {
   npm cache clean --force
-cd "${HOME}"/.npm/_npx || exit 1
-command ls -d -- * | xargs -I {} rm -rf -v "{}"
+  cd "${HOME}"/.npm/_npx || exit 1
+  command ls -d -- * | xargs -I {} rm -rf -v "{}"
 } || true
 _title "yarn cache clean"
 yarn cache clean
