@@ -1,5 +1,6 @@
 tap "adoptopenjdk/openjdk"
 tap "adtennant/tilengine"
+tap "aws/tap"
 tap "caskroom/fonts"
 tap "danielbayley/adobe"
 tap "homebrew/bundle"
@@ -11,19 +12,24 @@ tap "jonof/kenutils"
 tap "paleite/versions"
 tap "potatolabs/git-redate"
 tap "sambadevi/powerlevel9k"
+tap "scottrigby/macos-configurator"
 cask "adoptopenjdk8"
+# Search tool like grep, but optimized for programmers
+brew "ack"
+# Java build tool
+brew "ant"
 # Tool for reverse engineering 3rd party, closed, binary Android apps
 brew "apktool"
 # MPEG-4 command-line tool
 brew "atomicparsley"
 # Client for Amazon Elastic Beanstalk web service
 brew "aws-elasticbeanstalk"
+# Official Amazon AWS command-line interface
+brew "awscli"
 # Programmable completion for Bash 3.2
 brew "bash-completion"
 # Collection of portable C++ source libraries
 brew "boost"
-# Interpreted, interactive, object-oriented programming language
-brew "python"
 # Vector graphics library with cross-device output support
 brew "cairo"
 # Like cat but displays content with syntax highlighting
@@ -58,12 +64,16 @@ brew "gawk"
 brew "gdrive"
 # Distributed revision control system
 brew "git"
+# Extensions to follow Vincent Driessen's branching model
+brew "git-flow"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg", link: false
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Open-source build automation tool based on the Groovy and Kotlin DSL
+brew "gradle"
 # GNU grep, egrep and fgrep
 brew "grep"
 # Convert source code to formatted text with syntax highlighting
@@ -86,6 +96,8 @@ brew "lynx"
 brew "mackup"
 # Mac App Store command-line interface
 brew "mas"
+# Java-based project management
+brew "maven"
 # Collection of tools that nobody wrote when UNIX was young
 brew "moreutils", link: false
 # MP3 player for Linux and UNIX
@@ -96,6 +108,8 @@ brew "n"
 brew "nmap"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
+# Shell command parallelization utility
+brew "parallel"
 # Tool to automatically fix PHP coding standards issues
 brew "php-cs-fixer"
 # Pinentry for GPG on Mac
@@ -142,29 +156,34 @@ brew "zsh"
 brew "zsh-autosuggestions"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
+# AWS SAM CLI 🐿 is a tool for local development and testing of Serverless applications
+brew "aws/tap/aws-sam-cli"
 # Change the dates of several git commits with a single command
 brew "potatolabs/git-redate/git-redate"
 # A badass zsh theme with more power than a normal earthling
 brew "sambadevi/powerlevel9k/powerlevel9k"
-cask "adobe-creative-cloud"
+# Compares plist files line by line
+brew "scottrigby/macos-configurator/pldiff"
+cask "adoptopenjdk11"
+cask "amazon-chime"
 cask "betterzip"
 cask "charles"
-cask "cyberduck"
 cask "disk-inventory-x"
 cask "docker"
 cask "dropbox"
 cask "flux"
+cask "font-hack-nerd-font"
 cask "github"
 cask "google-chrome"
 cask "google-chrome-canary"
 cask "gpg-suite"
 cask "imagealpha"
 cask "imageoptim"
+cask "intellij-idea-ce"
 cask "iterm2"
 cask "lulu"
 cask "macdown"
-cask "majestic"
-cask "mjml"
+cask "macmediakeyforwarder"
 cask "notable"
 cask "postman"
 cask "qlcolorcode"
@@ -176,26 +195,21 @@ cask "qlvideo"
 cask "quicklook-csv"
 cask "quicklook-json"
 cask "quicklookase"
+cask "sketch43"
+cask "slack"
 cask "sourcetree"
 cask "spectacle"
 cask "spotify"
 cask "spotify-notifications"
-cask "sublime-text"
-cask "trailer"
-cask "tunnelblick"
 cask "visual-studio-code"
 cask "webpquicklook"
 cask "whatsapp"
-cask "zeplin"
-cask "caskroom/fonts/font-hack-nerd-font"
-cask "paleite/versions/sketch43"
 mas "GlucoGram", id: 1107429772
+mas "Jira", id: 1475897096
 mas "JPEGmini", id: 498944723
 mas "Memory Clean 2", id: 1114591412
-mas "monday", id: 1298450641
 mas "Resizer", id: 411277085
 mas "ResolutionTab", id: 540141595
 mas "RSS Bot", id: 605732865
-mas "Slack", id: 803453959
 mas "The Unarchiver", id: 425424353
 mas "Xcode", id: 497799835
