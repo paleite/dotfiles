@@ -24,7 +24,6 @@ function load_javahome() {
 # export PATH="${HOME}/.rbenv/shims:${PATH}"
 
 BEFORE=(
-  ${HOME}/.jabba/bin
   ${HOME}/.rbenv/shims
   ${HOME}/.composer/vendor/bin
   /usr/local/bin
@@ -47,3 +46,5 @@ export PATH
 
 export NODE_PATH="${HOME}/.config/yarn/global"
 export GOPATH="${HOME}/go"
+load_goroot
+load_javahome
