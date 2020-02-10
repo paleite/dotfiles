@@ -11,9 +11,9 @@ tap "homebrew/services"
 tap "jonof/kenutils"
 tap "paleite/versions"
 tap "potatolabs/git-redate"
+tap "remind101/formulae"
 tap "sambadevi/powerlevel9k"
 tap "scottrigby/macos-configurator"
-cask "adoptopenjdk8"
 # Search tool like grep, but optimized for programmers
 brew "ack"
 # Java build tool
@@ -28,6 +28,8 @@ brew "aws-elasticbeanstalk"
 brew "awscli"
 # Programmable completion for Bash 3.2
 brew "bash-completion"
+# Get/set bluetooth power and discoverable state
+brew "blueutil"
 # Collection of portable C++ source libraries
 brew "boost"
 # Vector graphics library with cross-device output support
@@ -119,7 +121,7 @@ brew "postgresql"
 # Ruby version manager
 brew "rbenv"
 # Persistent key-value database, with built-in net interface
-brew "redis", restart_service: true
+brew "redis"
 # Perl-powered file rename script with many helpful built-ins
 brew "rename"
 # Static analysis and lint tool, for (ba)sh scripts
@@ -139,7 +141,7 @@ brew "tree"
 # Secures, stores, and tightly controls access to secrets
 brew "vault"
 # Executes a program periodically, showing output fullscreen
-brew "watch"
+brew "watch", link: false
 # Watch files and take action when they change
 brew "watchman"
 # Display word differences between text files
@@ -160,6 +162,8 @@ brew "zsh-syntax-highlighting"
 brew "aws/tap/aws-sam-cli"
 # Change the dates of several git commits with a single command
 brew "potatolabs/git-redate/git-redate"
+# Easily assume AWS roles in your terminal
+brew "remind101/formulae/assume-role"
 # A badass zsh theme with more power than a normal earthling
 brew "sambadevi/powerlevel9k/powerlevel9k"
 # Compares plist files line by line
