@@ -3,10 +3,13 @@
 # shellcheck source=.profile
 source "${HOME}"/.profile
 
-[[ "${DEBUG}" == 'true' ]] && set -o xtrace
+export _COLOR=$(tput setaf 246)
+export _RESET=$(tput sgr0)
+export PS4=$'${_COLOR}# ~/${BASH_SOURCE[0]##~/}:${LINENO}\n${BASH_COMMAND}${_RESET}\n'
+# [[ "${DEBUG:-}" == 'true' ]] && set -o xtrace
 set -o errexit
-set -o pipefail
 set -o nounset
+set -o pipefail
 
 readonly ENVIRONMENT="${ENVIRONMENT:-shell}"
 export ENVIRONMENT

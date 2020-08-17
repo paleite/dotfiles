@@ -5,8 +5,8 @@ POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind git
 source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
 
 # Left and right prompt elements
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir dir_writable vcs ssh)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time aws load time battery)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status command_execution_time dir dir_writable vcs ssh)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(os_icon aws load time battery)
 
 # Options
 # POWERLEVEL9K_BATTERY_STAGES="▁▂▃▄▅▆▇█"

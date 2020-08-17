@@ -54,3 +54,4 @@ node_modules*/
 
 # Keep folders
 !/**/.gitkeep
+package-lock.json

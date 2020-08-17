@@ -14,6 +14,7 @@ tap "potatolabs/git-redate"
 tap "remind101/formulae"
 tap "sambadevi/powerlevel9k"
 tap "scottrigby/macos-configurator"
+tap "wix/brew"
 # Search tool like grep, but optimized for programmers
 brew "ack"
 # Java build tool
@@ -22,6 +23,8 @@ brew "ant"
 brew "apktool"
 # MPEG-4 command-line tool
 brew "atomicparsley"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.8"
 # Client for Amazon Elastic Beanstalk web service
 brew "aws-elasticbeanstalk"
 # Official Amazon AWS command-line interface
@@ -71,9 +74,11 @@ brew "git-flow"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
 # GNU Pretty Good Privacy (PGP) package
-brew "gnupg", link: false
+brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Reformats Java source code to comply with Google Java Style
+brew "google-java-format"
 # Open-source build automation tool based on the Groovy and Kotlin DSL
 brew "gradle"
 # GNU grep, egrep and fgrep
@@ -104,6 +109,10 @@ brew "maven"
 brew "moreutils", link: false
 # MP3 player for Linux and UNIX
 brew "mpg123"
+# Download YouTube videos from the command-line
+brew "youtube-dl"
+# Media player based on MPlayer and mplayer2
+brew "mpv"
 # Node version management
 brew "n"
 # Port scanning utility for large networks
@@ -121,7 +130,7 @@ brew "postgresql"
 # Ruby version manager
 brew "rbenv"
 # Persistent key-value database, with built-in net interface
-brew "redis"
+brew "redis", restart_service: true
 # Perl-powered file rename script with many helpful built-ins
 brew "rename"
 # Static analysis and lint tool, for (ba)sh scripts
@@ -150,8 +159,6 @@ brew "wdiff"
 brew "wget"
 # JavaScript package manager
 brew "yarn"
-# Download YouTube videos from the command-line
-brew "youtube-dl"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Fish-like fast/unobtrusive autosuggestions for zsh
@@ -168,6 +175,8 @@ brew "remind101/formulae/assume-role"
 brew "sambadevi/powerlevel9k/powerlevel9k"
 # Compares plist files line by line
 brew "scottrigby/macos-configurator/pldiff"
+# Apple simulator utilities
+brew "wix/brew/applesimutils"
 cask "adoptopenjdk11"
 cask "amazon-chime"
 cask "betterzip"
@@ -188,6 +197,7 @@ cask "iterm2"
 cask "lulu"
 cask "macdown"
 cask "macmediakeyforwarder"
+cask "microsoft-teams"
 cask "notable"
 cask "postman"
 cask "qlcolorcode"
@@ -199,19 +209,29 @@ cask "qlvideo"
 cask "quicklook-csv"
 cask "quicklook-json"
 cask "quicklookase"
+cask "quitter"
 cask "sketch43"
 cask "slack"
 cask "sourcetree"
 cask "spectacle"
 cask "spotify"
 cask "spotify-notifications"
+cask "vagrant"
+cask "virtualbox"
 cask "visual-studio-code"
+cask "vlc"
 cask "webpquicklook"
 cask "whatsapp"
+mas "GarageBand", id: 682658836
 mas "GlucoGram", id: 1107429772
+mas "iMovie", id: 408981434
 mas "Jira", id: 1475897096
 mas "JPEGmini", id: 498944723
+mas "Keynote", id: 409183694
 mas "Memory Clean 2", id: 1114591412
+mas "monday.com", id: 1298450641
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
 mas "Resizer", id: 411277085
 mas "ResolutionTab", id: 540141595
 mas "RSS Bot", id: 605732865

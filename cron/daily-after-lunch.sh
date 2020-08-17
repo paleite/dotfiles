@@ -23,8 +23,8 @@ _exit_on_tethered
 _title "mas upgrade"
 mas upgrade
 
-_title "n latest"
-n latest
+_title "n lts"
+n lts
 
 _title "yarn global list outdated"
 # npm i -g $(npx -p npm-check-updates ncu -g | awk -F" " '{print $1}' | tr '\n' ' ')
