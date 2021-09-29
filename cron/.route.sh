@@ -5,14 +5,17 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-readonly JOB_NAME=${1:-}
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+readonly DIR
+JOB_NAME=${1:-}
+readonly JOB_NAME
 
 cd "${DIR}"
-# shellcheck source=cron/.functions
+# shellcheck source=./.functions
 source .functions
 
 SCRIPT_PATH="${DIR}/${JOB_NAME}".sh
+readonly SCRIPT_PATH
 if [ -r "$SCRIPT_PATH" ] && [ -x "$SCRIPT_PATH" ]; then
   _title "$JOB_NAME"
   export JOB_NAME
