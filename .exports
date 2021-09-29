@@ -25,3 +25,13 @@ export SAM_CLI_TELEMETRY=0
 export CYPRESS_CRASH_REPORTS=0
 ## Homebrew
 export HOMEBREW_NO_ANALYTICS=1
+
+# Prefer Yarn
+## Husky
+export HUSKY_USE_YARN=true
+
+# NVM_DIR
+export NVM_DIR="$HOME/.nvm"
+
+# Cypress
+export CYPRESS_DEFAULT_COMMAND_TIMEOUT=2000

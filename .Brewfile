@@ -1,7 +1,6 @@
 tap "adoptopenjdk/openjdk"
 tap "adtennant/tilengine"
 tap "aws/tap"
-tap "caskroom/fonts"
 tap "danielbayley/adobe"
 tap "homebrew/bundle"
 tap "homebrew/cask"
@@ -21,10 +20,10 @@ brew "ack"
 brew "ant"
 # Tool for reverse engineering 3rd party, closed, binary Android apps
 brew "apktool"
-# MPEG-4 command-line tool
-brew "atomicparsley"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.8"
+# MPEG-4 command-line tool
+brew "atomicparsley"
 # Client for Amazon Elastic Beanstalk web service
 brew "aws-elasticbeanstalk"
 # Official Amazon AWS command-line interface
@@ -69,6 +68,8 @@ brew "gawk"
 brew "gdrive"
 # Distributed revision control system
 brew "git"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
 # Extensions to follow Vincent Driessen's branching model
 brew "git-flow"
 # GNU implementation of the famous stream editor
@@ -81,20 +82,30 @@ brew "go"
 brew "google-java-format"
 # Open-source build automation tool based on the Groovy and Kotlin DSL
 brew "gradle"
+# Library to render SVG files using Cairo
+brew "librsvg"
 # GNU grep, egrep and fgrep
 brew "grep"
+# Development framework for multimedia applications
+brew "gstreamer"
+# GStreamer plugins for Libav (a fork of FFmpeg)
+brew "gst-libav"
+# GStreamer plugins less supported, not fully tested
+brew "gst-plugins-bad"
+# GStreamer plugins (well-supported, under the LGPL)
+brew "gst-plugins-good"
+# Library for constructing graphs of media-handling components
+brew "gst-plugins-ugly"
 # Convert source code to formatted text with syntax highlighting
-brew "highlight", link: false
+brew "highlight"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
 # Dex to Java decompiler
 brew "jadx"
-# Joe's Own Editor (JOE)
+# Full featured terminal-based screen editor
 brew "joe"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
-# Library to render SVG files using Cairo
-brew "librsvg"
 # YAML Parser
 brew "libyaml"
 # Text-based web browser
@@ -105,8 +116,10 @@ brew "mackup"
 brew "mas"
 # Java-based project management
 brew "maven"
+# Matroska media files manipulation tools
+brew "mkvtoolnix"
 # Collection of tools that nobody wrote when UNIX was young
-brew "moreutils", link: false
+brew "moreutils"
 # MP3 player for Linux and UNIX
 brew "mpg123"
 # Download YouTube videos from the command-line
@@ -135,6 +148,8 @@ brew "redis", restart_service: true
 brew "rename"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
+# Autoformat shell script source code
+brew "shfmt"
 # SOund eXchange: universal sound sample translator
 brew "sox"
 # Send macOS User Notifications from the command-line
@@ -175,33 +190,64 @@ brew "remind101/formulae/assume-role"
 brew "sambadevi/powerlevel9k/powerlevel9k"
 # Compares plist files line by line
 brew "scottrigby/macos-configurator/pldiff"
-# Apple simulator utilities
-brew "wix/brew/applesimutils"
+# AdoptOpenJDK OpenJDK (Java) Development Kit
 cask "adoptopenjdk11"
+# Communications service
 cask "amazon-chime"
+# Utility to create and modify archives
 cask "betterzip"
+# Web debugging Proxy application
 cask "charles"
+# Nintendo 3DS emulator
+cask "citra"
+# Disk usage utility
 cask "disk-inventory-x"
+# App to build and share containerized applications and microservices
 cask "docker"
+# Client for the Dropbox cloud storage service
 cask "dropbox"
+# Web browser
+cask "firefox-nightly"
+# Screen color temperature controller
 cask "flux"
 cask "font-hack-nerd-font"
+# Desktop client for GitHub repositories
 cask "github"
+# Web browser
 cask "google-chrome"
+# Web browser
 cask "google-chrome-canary"
+# Tools to protect your emails and files
 cask "gpg-suite"
+# Light, Electron-based Wrapper around GraphiQL
+cask "graphiql"
+# Utility to reduce the size of 24-bit PNG files
 cask "imagealpha"
+# Tool to optimize images to a smaller size
 cask "imageoptim"
+# IDE for Java development - community edition
 cask "intellij-idea-ce"
+# Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+# Open-source firewall to block unknown outgoing connections
 cask "lulu"
+# Open-source Markdown editor
 cask "macdown"
+# Media key forwarder for iTunes and Spotify
 cask "macmediakeyforwarder"
+# Provides updates to various Microsoft products
+cask "microsoft-auto-update"
+# Web browser
+cask "microsoft-edge"
+# Meet, chat, call, and collaborate in just one place
 cask "microsoft-teams"
+# Markdown-based note-taking app that doesn't suck
 cask "notable"
+# Collaboration platform for API development
 cask "postman"
-cask "qlcolorcode"
+# Display image info and preview unsupported formats in QuickLook
 cask "qlimagesize"
+# QuickLook generator for Markdown files
 cask "qlmarkdown"
 cask "qlprettypatch"
 cask "qlstephen"
@@ -209,27 +255,44 @@ cask "qlvideo"
 cask "quicklook-csv"
 cask "quicklook-json"
 cask "quicklookase"
+# Automatically hides or quits apps after periods of inactivity
 cask "quitter"
+# Web browser
+cask "safari-technology-preview"
+# Instant messaging application focusing on security
+cask "signal"
 cask "sketch43"
+# Team communication and collaboration software
 cask "slack"
+# Graphical client for Git version control
 cask "sourcetree"
+# Move and resize windows with ease
 cask "spectacle"
+# Music streaming service
 cask "spotify"
 cask "spotify-notifications"
+# Quicklook extension for source files
+cask "syntax-highlight"
+# Development environment
 cask "vagrant"
+# Free and open-source hosted hypervisor for x86 virtualization
 cask "virtualbox"
+# Open-source code editor
 cask "visual-studio-code"
+# Multimedia player
 cask "vlc"
 cask "webpquicklook"
+# Desktop client for WhatsApp
 cask "whatsapp"
-mas "GarageBand", id: 682658836
+# Video communication and virtual meeting platform
+cask "zoom"
+mas "Floating", id: 1508833245
 mas "GlucoGram", id: 1107429772
-mas "iMovie", id: 408981434
 mas "Jira", id: 1475897096
 mas "JPEGmini", id: 498944723
 mas "Keynote", id: 409183694
 mas "Memory Clean 2", id: 1114591412
-mas "monday.com", id: 1298450641
+mas "Microsoft Outlook", id: 985367838
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Resizer", id: 411277085
