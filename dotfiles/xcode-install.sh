@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 [[ "${DEBUG}" == 'true' ]] && set -o xtrace
 set -o errexit
@@ -12,7 +12,7 @@ echo "$(tput bold)dotfiles xcode$(tput sgr0)"
 
 # Install Xcode Command Line Tools (adds git, make, etc. needed for homebrew)
 are_xcode_command_line_tools_installed() {
-    [[ "${FORCE:-false}" != 'true' ]] && xcrun --version >/dev/null 2>&1
+  [[ "${FORCE:-false}" != 'true' ]] && xcrun --version >/dev/null 2>&1
 }
 
 install_xcode_command_line_tools() {
@@ -22,17 +22,16 @@ install_xcode_command_line_tools() {
   # awk with delimiter '*'
   # sed removes leading space
   # tr removes trailing newline
-  PROD=$( \
-    sudo /usr/sbin/softwareupdate --list | \
-    /usr/bin/grep --extended-regexp '^\s+\* Command Line Tools' | \
-    /usr/bin/awk -F'*' '/^ +\\*/ {print $2}' | \
-    /usr/bin/sed 's/^ *//' | \
-    /usr/bin/tr -d '\n' || \
-    true \
+  PROD=$(
+    sudo /usr/sbin/softwareupdate --list |
+      /usr/bin/grep --extended-regexp '^\s+\* Command Line Tools' |
+      /usr/bin/awk -F'*' '/^ +\\*/ {print $2}' |
+      /usr/bin/sed 's/^ *//' |
+      /usr/bin/tr -d '\n' ||
+      true
   )
 
-  if [[ "$PROD" != "" ]]
-  then
+  if [[ "$PROD" != "" ]]; then
     sudo /usr/sbin/softwareupdate --verbose --install "${PROD}"
   fi
 

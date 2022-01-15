@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 [[ "${DEBUG}" == 'true' ]] && set -o xtrace
 set -o errexit
