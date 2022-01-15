@@ -191,7 +191,7 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 # Set language and text formats
 # Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
 # `Inches`, `en_GB` with `en_US`, and `true` with `false`.
-defaults write NSGlobalDomain AppleLanguages -array "en-SE" "sv-SE"
+defaults write NSGlobalDomain AppleLanguages -array "en-US" "de-DE" "sv-SE"
 defaults write NSGlobalDomain AppleLocale -string "en_SE"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
 defaults write NSGlobalDomain AppleMetricUnits -bool true
@@ -200,10 +200,10 @@ defaults write NSGlobalDomain AppleMetricUnits -bool true
 # sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
 
 # Set the timezone; see `sudo systemsetup -listtimezones` for other values
-sudo systemsetup -settimezone "Europe/Stockholm" > /dev/null
+sudo systemsetup -settimezone "Europe/Stockholm" >/dev/null
 
 # Stop iTunes from responding to the keyboard media keys
-launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
+launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2>/dev/null
 
 ###############################################################################
 # Screen                                                                      #
@@ -607,11 +607,11 @@ defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
 # 	'{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
 # Load new settings before rebuilding the index
 # TODO: Investigate why it exits with non-zero code
-killall mds > /dev/null 2>&1 || true
+killall mds >/dev/null 2>&1 || true
 # Make sure indexing is enabled for the main volume
-sudo mdutil -i on / > /dev/null
+sudo mdutil -i on / >/dev/null
 # Rebuild the index from scratch
-sudo mdutil -E / > /dev/null
+sudo mdutil -E / >/dev/null
 
 ###############################################################################
 # Terminal & iTerm 2                                                          #
@@ -700,8 +700,7 @@ defaults write com.apple.terminal SecureKeyboardEntry -bool true
 ###############################################################################
 
 # Enable FileVault Service
-if [[ $(sudo fdesetup isactive) != "true" ]];
-then
+if [[ $(sudo fdesetup isactive) != "true" ]]; then
   sudo fdesetup enable
 fi
 
@@ -958,10 +957,9 @@ for APP in \
   "SystemUIServer" \
   "Transmission" \
   "Tweetbot" \
-  "Twitter" \
-  ; do
+  "Twitter"; do
   # Kill app
-  killall "${APP}" &> /dev/null || continue
+  killall "${APP}" &>/dev/null || continue
   # If it was killed, restart it
   open -a "${APP}" >/dev/null 2>&1 || true
 done
