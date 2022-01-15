@@ -5,10 +5,11 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+readonly DIR
 
 cd "${DIR}"
-# shellcheck source=cron/.functions
+# shellcheck source=./.functions
 source .functions
 
 set -o verbose
@@ -23,39 +24,53 @@ _exit_on_tethered
 # "${HOME}"/Google Drive # Must be handled manually
 # "${HOME}"/.vscode # Contains extensions, so can't be removed
 # "${HOME}"/npm-packages-offline-cache
+
 _title "brew cleanup"
 brew cleanup -s
-# _title "brew doctor"
+
+_title "brew doctor"
 # Brew doctor fails when it has a warning. Maybe better to run this as a separate task
-# brew doctor
-# sudo chown -R "$(whoami)" $(brew --prefix)/\* # Fix /usr/local not being writable
+brew doctor || true
+sudo chown -R "$(whoami)" "$(brew --prefix)"/* # Fix /usr/local not being writable
+
 # _title "brew prune"
 # brew prune # Warning: Calling 'brew prune' is deprecated! Use 'brew cleanup' instead.
+
 _title "npm cache clean --force"
 {
   npm cache clean --force
   cd "${HOME}"/.npm/_npx || exit 1
   command ls -d -- * | xargs -I {} rm -rf -v "{}"
 } || true
+
 _title "yarn cache clean"
 yarn cache clean
+
 _title "n prune"
 n prune
-_title "docker system prune -a"
-docker system prune -a --force
+
+{
+  _title "docker system prune -a"
+  docker system prune -a --force
+} || true
+
+
 _title "Prune old Spotify cache"
 cd "${HOME}/Library/Application Support/Spotify/PersistentCache/Storage" || exit 1
 command ls -t | tail -n +5 | xargs -I {} trash -v "{}"
+
 _title "Prune old files in ${HOME}/.electron"
 cd "${HOME}"/.electron || exit 1
 command ls -t | tail -n +5 | xargs -I {} trash -v "{}"
+
 _title "Prune CoreSimulator images"
 # NB: If you get 'xcrun: error: unable to find utility "simctl", not a developer tool or in PATH', try adding
 # Command Line Tools in Xcode: Preferences > Locations > Locations > Command Line Tools
 xcrun simctl delete unavailable || {
-  echo "⚠️  If you get 'xcrun: error: unable to find utility \"simctl\", not a developer tool or in PATH', try adding"
+  echo "⚠️ If you get 'xcrun: error: unable to find utility \"simctl\", not a developer tool or in PATH', try adding"
   echo "Command Line Tools in Xcode: Preferences > Locations > Locations > Command Line Tools"
 }
+
 _title "Delete Adobe logs"
 cd "${HOME}"/Library/Logs/ || exit 1
 # Files

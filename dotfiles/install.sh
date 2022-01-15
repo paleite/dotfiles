@@ -188,4 +188,4 @@ crontab ./crontab
 ./post-install.sh
 
 echo "$(tput setaf 4)info$(tput sgr0) Some of the changes require a logout/restart to take effect."
-echo "✨  Done."
+echo "✨ Done."

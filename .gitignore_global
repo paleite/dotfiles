@@ -40,18 +40,20 @@ Thumbs.db
 # CUSTOM #
 ##########
 .eslintcache
+.gradle/
 .php_cs.cache
 .stylelintcache
 *.bak
 /.cache/
 /.sync
 /.vscode/settings.json
-/coverage/
 /gitignore/
 /icon.png
+coverage/
 node_modules*/
-.gradle/
 
 # Keep folders
 !/**/.gitkeep
+
 package-lock.json
+.env.*.local

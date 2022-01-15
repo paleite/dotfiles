@@ -81,30 +81,23 @@ function _alert() {
 
   _ALERT_MESSAGE="${3:-}"
 
-  if [[ "${_ALERT_MESSAGE}" != "" ]]; then
-    TERMINAL_NOTIFIER_OPTIONS+=(-title "${_ALERT_TITLE}")
-    TERMINAL_NOTIFIER_OPTIONS+=(-message "${_ALERT_MESSAGE}")
-  else
-    TERMINAL_NOTIFIER_OPTIONS+=(-message "${_ALERT_TITLE}")
-  fi
-
   case "${_ALERT_TYPE}" in
   success)
     _ALERT_TITLE="${2:-Success}"
     TERMINAL_NOTIFIER_OPTIONS+=(-sound default)
-    TERMINAL_NOTIFIER_OPTIONS+=(-appIcon ~/dotfiles/assets/success.png)
+    TERMINAL_NOTIFIER_OPTIONS+=(-contentImage ~/dotfiles/assets/success.png)
     ;;
 
   warn)
     _ALERT_TITLE="${2:-Warning}"
     TERMINAL_NOTIFIER_OPTIONS+=(-sound Funk)
-    TERMINAL_NOTIFIER_OPTIONS+=(-appIcon ~/dotfiles/assets/warn.png)
+    TERMINAL_NOTIFIER_OPTIONS+=(-contentImage ~/dotfiles/assets/warn.png)
     ;;
 
   error)
     _ALERT_TITLE="${2:-Error}"
     TERMINAL_NOTIFIER_OPTIONS+=(-sound Basso)
-    TERMINAL_NOTIFIER_OPTIONS+=(-appIcon ~/dotfiles/assets/error.png)
+    TERMINAL_NOTIFIER_OPTIONS+=(-contentImage ~/dotfiles/assets/error.png)
     ;;
   esac
 
@@ -112,6 +105,13 @@ function _alert() {
     TERMINAL_NOTIFIER_OPTIONS+=(-group "$(tty)")
   else
     TERMINAL_NOTIFIER_OPTIONS+=(-group "${_ALERT_GROUP}")
+  fi
+
+    if [[ "${_ALERT_MESSAGE}" != "" ]]; then
+    TERMINAL_NOTIFIER_OPTIONS+=(-title "${_ALERT_TITLE}")
+    TERMINAL_NOTIFIER_OPTIONS+=(-message "${_ALERT_MESSAGE}")
+  else
+    TERMINAL_NOTIFIER_OPTIONS+=(-message "${_ALERT_TITLE}")
   fi
 
   echo "${_ALERT_TITLE}: ${_ALERT_MESSAGE}"

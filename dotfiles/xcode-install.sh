@@ -60,4 +60,4 @@ install_xcode_command_line_tools() {
   # END Fallback solution
 }
 
-are_xcode_command_line_tools_installed || install_xcode_command_line_tools
+install_xcode_command_line_tools

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export HUSKY_DEBUG=0
+PATH="$(which node):$PATH"
+export PATH

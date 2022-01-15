@@ -44,7 +44,7 @@ PATH=$(
 )
 export PATH
 
-export NODE_PATH="${HOME}/.config/yarn/global"
+export NODE_PATH="$(npm root -g)"
 export GOPATH="${HOME}/go"
 load_goroot
 load_javahome
