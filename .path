@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 function load_goroot() {
   local _PWD=${HOME}
