@@ -14,6 +14,7 @@ code --install-extension andys8.jest-snippets
 code --install-extension asvetliakov.snapshot-tools
 code --install-extension atlassian.atlascode
 code --install-extension bibhasdn.unique-lines
+code --install-extension bradlc.vscode-tailwindcss
 code --install-extension burkeholland.simple-react-snippets
 code --install-extension capaj.graphql-codegen-vscode
 code --install-extension christian-kohler.npm-intellisense
@@ -51,6 +52,7 @@ code --install-extension LouisWT.regexp-preview
 code --install-extension MarioQueiros.CamelCase
 code --install-extension mariusschulz.yarn-lock-syntax
 code --install-extension marp-team.marp-vscode
+code --install-extension mattferri.themey
 code --install-extension mechatroner.rainbow-csv
 code --install-extension mermade.openapi-lint
 code --install-extension mikestead.dotenv
@@ -97,6 +99,7 @@ code --install-extension redhat.vscode-commons
 code --install-extension redhat.vscode-yaml
 code --install-extension rikurouvila.typehole
 code --install-extension RobbOwen.synthwave-vscode
+code --install-extension sanity-io.vscode-sanity
 code --install-extension sburg.vscode-javascript-booster
 code --install-extension sdras.night-owl
 code --install-extension shd101wyy.markdown-preview-enhanced
