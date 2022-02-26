@@ -107,7 +107,7 @@ function _alert() {
     TERMINAL_NOTIFIER_OPTIONS+=(-group "${_ALERT_GROUP}")
   fi
 
-    if [[ "${_ALERT_MESSAGE}" != "" ]]; then
+  if [[ "${_ALERT_MESSAGE}" != "" ]]; then
     TERMINAL_NOTIFIER_OPTIONS+=(-title "${_ALERT_TITLE}")
     TERMINAL_NOTIFIER_OPTIONS+=(-message "${_ALERT_MESSAGE}")
   else
@@ -139,6 +139,15 @@ function check_upstream() {
   local _RETURN_CODE=0
   if ! cd "${_NEW_PWD}" || ! git fetch --all --prune >/dev/null; then
     _RETURN_CODE=2
+  fi
+
+  if [[ $_RETURN_CODE -eq 0 && "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]]; then
+    set +o errexit
+    git pull >/dev/null 2>&1
+    set -o errexit
+    if [[ $_RETURN_CODE -ne 0 ]]; then
+      echo "^ From repo at path $(pwd)"
+    fi
   fi
 
   if [[ $_RETURN_CODE -eq 0 && "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]]; then

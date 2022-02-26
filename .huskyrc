@@ -3,3 +3,5 @@
 export HUSKY_DEBUG=0
 PATH="$(which node):$PATH"
 export PATH
+export PATH="/Users/patrickeriksson/.nvm/versions/node/v14.18.1/bin:$PATH"
+export PATH="/Users/patrickeriksson/.nvm/versions/node/v14.19.0/bin:$PATH"

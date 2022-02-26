@@ -1,5 +1,5 @@
 # Set default editor to joe
-export EDITOR="joe"
+export EDITOR="code --wait"
 
 # Turn on colors
 export CLICOLOR=1
