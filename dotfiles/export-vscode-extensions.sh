@@ -7,7 +7,8 @@ set -o nounset
 
 echo "$(tput bold)dotfiles export-vscode-extensions$(tput sgr0)"
 
-readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+readonly DIR
 readonly DRY_RUN=true
 readonly IMPORTFILE="import-vscode-extensions.sh"
 readonly DESTINATION_PATH="${DIR}/${IMPORTFILE}"

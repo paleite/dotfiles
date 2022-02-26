@@ -5,12 +5,13 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+readonly DIR
 
 cd "${DIR}"
-# shellcheck source=cron/.functions
+# shellcheck source=./.functions
 source .functions
-source ~/.functions
+source "${HOME}"/.functions
 
 set -o verbose
 

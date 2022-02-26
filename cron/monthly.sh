@@ -54,7 +54,6 @@ n prune
   docker system prune -a --force
 } || true
 
-
 _title "Prune old Spotify cache"
 cd "${HOME}/Library/Application Support/Spotify/PersistentCache/Storage" || exit 1
 command ls -t | tail -n +5 | xargs -I {} trash -v "{}"

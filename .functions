@@ -155,7 +155,7 @@ function check_upstream() {
 function start() {
   # Open all folders in .projects
   PROJECTS_LIST_FILE="${HOME}"/dev/.projects
-  cd $(dirname "${PROJECTS_LIST_FILE}") || return 1
+  cd "$(dirname "${PROJECTS_LIST_FILE}")" || return 1
   grep -E '^[^#]' <"${PROJECTS_LIST_FILE}" | xargs -n1 code
 }
 
