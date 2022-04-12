@@ -17,6 +17,5 @@ fi
 
 echo "Creating ${F}"
 
-touch "${F}"
-.f add "${F}"
-code "${F}"
+code --wait "${F}"
+.f commit --message "Created ${F}" "${F}"
