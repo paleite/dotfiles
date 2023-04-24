@@ -1,5 +1,6 @@
 ENVIRONMENT=cron
 TERM=dumb
+export DEBUG=true
 
 #
 # env EDITOR=nano crontab -e
@@ -22,17 +23,17 @@ TERM=dumb
 #  Min  |  Hour  |  Mday  |  Month  |  Wday  |  Command                        #
 #==============================================================================#
 #  0       3        *        *         *        ./cron/.run.sh daily-nighttime
-   2      10        *        *         1-5      ./cron/.run.sh daily-at-10-during-weekdays
-   2      11        *        *         1-5      ./cron/.run.sh daily-at-11-during-weekdays
+#  2      10        *        *         1-5      ./cron/.run.sh daily-at-10-during-weekdays
+#  2      11        *        *         1-5      ./cron/.run.sh daily-at-11-during-weekdays
    2      13        *        *         *        ./cron/.run.sh daily-after-lunch
    2      15        *        *         1-5      ./cron/.run.sh daily-at-15-during-weekdays
 #  *       *        *        *         *        ./cron/.run.sh every-minute
    */5     *        *        *         *        ./cron/.run.sh every-five-minutes
-   */5     9-17     *        *         1-5      ./cron/.run.sh every-five-minutes-during-weekdays
+#  */5     9-17     *        *         1-5      ./cron/.run.sh every-five-minutes-during-weekdays
 # 15       *        *        *         *        ./cron/.run.sh every-hour
 # 20      17,18     *        *         1-5      ./cron/.run.sh twice-during-weekdays
 #  0       0        *        *         0        ./cron/.run.sh twice-a-week
-   7      13        *        *         2        ./cron/.run.sh weekly
+#  7      13        *        *         2        ./cron/.run.sh weekly
 #  0       0        *        *         4        ./cron/.run.sh twice-a-week
    2      13        1        *         *        ./cron/.run.sh monthly
 #==============================================================================#

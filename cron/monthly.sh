@@ -58,9 +58,9 @@ _title "Prune old Spotify cache"
 cd "${HOME}/Library/Application Support/Spotify/PersistentCache/Storage" || exit 1
 command ls -t | tail -n +5 | xargs -I {} trash -v "{}"
 
-_title "Prune old files in ${HOME}/.electron"
-cd "${HOME}"/.electron || exit 1
-command ls -t | tail -n +5 | xargs -I {} trash -v "{}"
+# _title "Prune old files in ${HOME}/.electron"
+# cd "${HOME}"/.electron || exit 1
+# command ls -t | tail -n +5 | xargs -I {} trash -v "{}"
 
 _title "Prune CoreSimulator images"
 # NB: If you get 'xcrun: error: unable to find utility "simctl", not a developer tool or in PATH', try adding

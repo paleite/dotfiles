@@ -25,4 +25,4 @@ export ENVIRONMENT
 
 # shellcheck source=./.functions
 source "${HOME}"/cron/.functions
-_run_cronjob "${HOME}"/cron/.route.sh "$@" | cron-gmail --subject "[Cron] $*" --tag "cron $*"
+_run_cronjob "${HOME}"/cron/.route.sh "$@" | "${HOME}"/dev/cron-gmail/bin/cli.js --subject "[Cron] $*" --tag "cron $*"

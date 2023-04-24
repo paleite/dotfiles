@@ -15,5 +15,5 @@ source .functions
 set -o verbose
 
 _exit_on_tethered
-cd "${HOME}"/dev/Nickelodeon
-yarn run cron
+# cd "${HOME}"/dev/Nickelodeon
+# yarn run cron
