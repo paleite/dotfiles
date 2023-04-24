@@ -115,7 +115,7 @@ function _alert() {
   fi
 
   echo "${_ALERT_TITLE}: ${_ALERT_MESSAGE}"
-  /usr/local/bin/terminal-notifier "${TERMINAL_NOTIFIER_OPTIONS[@]:-}"
+  /opt/homebrew/bin/terminal-notifier "${TERMINAL_NOTIFIER_OPTIONS[@]:-}"
 }
 
 function success() {
@@ -191,3 +191,4 @@ function fromhex() {
   g < 75 ? 0 : (g - 35) / 40) * 6 + (\
   b < 75 ? 0 : (b - 35) / 40) + 16))"
 }
+

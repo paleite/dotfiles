@@ -1,18 +1,15 @@
 # Init
-POWERLEVEL9K_MODE="nerdfont-complete"
-# ZSH_THEME="powerlevel9k/powerlevel9k"
-POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind git-remotebranch git-tagname)
-source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
+source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+source "${HOME}"/.p10k.zsh
 
 # Left and right prompt elements
+POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind git-remotebranch git-tagname)
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status command_execution_time dir dir_writable vcs ssh)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(os_icon aws load time battery)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(os_icon command_execution_time background_jobs direnv asdf virtualenv anaconda pyenv goenv nodenv nvm nodeenv rbenv rvm fvm luaenv jenv plenv perlbrew phpenv scalaenv haskell_stack kubecontext terraform aws aws_eb_env azure gcloud google_app_cred toolbox context nordvpn ranger nnn lf xplr vim_shell midnight_commander nix_shell vi_mode todo timewarrior taskwarrior load time battery)
 
 # Options
-# POWERLEVEL9K_BATTERY_STAGES="▁▂▃▄▅▆▇█"
 POWERLEVEL9K_RAM_ELEMENTS=(ram_free)
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_TIME_FORMAT='%D{%H:%M:%S}'
 
 # Colors
 POWERLEVEL9K_BATTERY_LEVEL_BACKGROUND=(red1 orangered1 darkorange orange1 gold1 yellow1 yellow2 greenyellow chartreuse1 chartreuse2 green1)

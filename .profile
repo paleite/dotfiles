@@ -15,3 +15,7 @@ unset file;
 [[ $BASH ]] && [[ -s /usr/local/etc/bash_completion ]] && source /usr/local/etc/bash_completion
 
 # if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi # Very slow and dangerous. Should rbenv ever be compromised, this will grant it access to inject code.
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
