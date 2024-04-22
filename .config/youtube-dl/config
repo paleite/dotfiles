@@ -10,14 +10,23 @@
 # Use the thumbnail as a poster for the video
 --write-thumbnail
 
+# Use a format that's good enough to be viewed on a mobile device, but doesn't kill mobile data
+--format "best,bestvideo+bestaudio"
+
 # Write subs
 --write-sub
+
+# Subtitle format; accepts formats preference, e.g. "srt" or "ass/srt/best"
+--sub-format "srt/best"
 
 # Convert the subs to a common format (maybe overkill)
 --convert-subs srt
 
-# Use a format that's good enough to be viewed on a mobile device, but doesn't kill mobile data
---format 'best,bestvideo+bestaudio'
+# Languages of the subtitles to download
+--sub-langs "en.*,de.*,sv.*,ru.*"
+
+# Write automatically generated subtitle file
+--write-auto-subs
 
 # Write a description of the video
 --write-description
@@ -28,9 +37,12 @@
 # Do not mark videos watched (YouTube only)
 --no-mark-watched
 
---user-agent 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
+# Display progress in console titlebar
+--console-title
+
+--user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
 
 # TODO:
-# '--embed-thumbnail',
-# '--embed-subs',
-# '--write-sub',
+# "--embed-thumbnail",
+# "--embed-subs",
+# "--write-sub",

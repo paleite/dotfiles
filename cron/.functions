@@ -3,7 +3,7 @@
 function alert() {
   ALERT_TITLE="${1:-}"
   ALERT_MESSAGE="${2:-}"
-  /opt/homebrew/bin/terminal-notifier -title "${ALERT_TITLE}" -message "${ALERT_MESSAGE}" -sound default
+  "$(brew --prefix)"/bin/terminal-notifier -title "${ALERT_TITLE}" -message "${ALERT_MESSAGE}" -sound default
 }
 
 function _run_cronjob() {
