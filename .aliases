@@ -1,6 +1,11 @@
-alias .f='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias .f="echo $'\C-[[34minfo\C-[(B\C-[[m Run .fsession to get git to use the ~/dotfiles-directory for this session\n'; git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias .fsession="export GIT_DIR="${HOME}/.dotfiles/"; export GIT_WORK_TREE="${HOME}"; echo $'\C-[[33mwarn\C-[(B\C-[[m git will use the '~/dotfiles'-directory for this session.'"
 
-alias alert='/usr/local/bin/terminal-notifier -title "${PWD//${HOME}/\~}" -message "${ALERT_MESSAGE:-Done}" -sound default; printf "\a"'
+# typos
+alias gti="git"
+alias vim="nvim"
+
+alias alert='"$(brew --prefix)"/bin/terminal-notifier -title "${PWD//${HOME}/\~}" -message "${ALERT_MESSAGE:-Done}" -sound default; printf "\a"'
 alias cat='ccat'
 alias ducks="du -cks * | sort -rn | head"
 alias cgrep='grep --color=always'
@@ -12,10 +17,19 @@ alias sudo='sudo '
 # alias gitpurge="git checkout develop >/dev/null 2>&1 && (git branch --merged | awk '/feature/{ print $1 }' | xargs git branch -d {}; git checkout - >/dev/null 2>&1)"
 alias gitpurge='git checkout develop && (git branch --merged | awk "/feature/{ print $1 }" | (xargs git branch -d {}); git checkout -)'
 alias isodate='date "+%Y-%m-%d %H:%M:%S"'
-alias peslint='yarn exec -- eslint --cache --config ~/.eslintrc-personal-preference.js --ext .js,.ts,.tsx --resolve-plugins-relative-to "$(git rev-parse --show-toplevel)"'
-alias review='yarn exec -- eslint --cache --config ~/.eslintrc-review.js --ext .js,.ts,.tsx --resolve-plugins-relative-to "$(git rev-parse --show-toplevel)"'
+alias peslint='pnpx eslint --cache --config ~/.eslintrc-personal-preference.js --ext .js,.ts,.tsx --resolve-plugins-relative-to "$(git rev-parse --show-toplevel)"'
+# alias lint='git diff --diff-filter=ACM $(git forkpoint) --name-only -z "*.tsx" "*.ts" "*.js" | ESLINT_PLUGIN_DIFF_COMMIT="$(git forkpoint)" xargs -0 pnpx eslint --cache --config ~/.eslintrc-personal-preference.js --ext .js,.ts,.tsx --resolve-plugins-relative-to "$(git rev-parse --show-toplevel)"'
+# alias lint='export ESLINT_SORT=true; export ESLINT_PLUGIN_DIFF_COMMIT="$(git merge-base origin/HEAD "HEAD^")"; export GIT_ROOT_FOLDER="$(git rev-parse --show-toplevel)"; git diff --diff-filter=ACM "$ESLINT_PLUGIN_DIFF_COMMIT" --name-only -z "*.tsx" "*.ts" "*.js" | xargs -0 pnpx eslint --cache --config ~/.eslintrc-personal-preference.js --ext .js,.ts,.tsx --resolve-plugins-relative-to "$GIT_ROOT_FOLDER" --fix; git diff --diff-filter=ACM "$ESLINT_PLUGIN_DIFF_COMMIT" --name-only -z "*.tsx" "*.ts" "*.js" | xargs -0 organize-imports-cli; pnpm exec -- prettier --write . ;'
+alias lint='export ESLINT_SORT=true; export ESLINT_PLUGIN_DIFF_COMMIT="${ESLINT_PLUGIN_DIFF_COMMIT:-$(git merge-base origin/HEAD "HEAD^")}"; export GIT_ROOT_FOLDER="$(git rev-parse --show-toplevel)"; git diff --diff-filter=ACM "$ESLINT_PLUGIN_DIFF_COMMIT" --name-only -z "*.tsx" "*.ts" "*.js" | xargs -0 npx -p @typescript-eslint/eslint-plugin@latest -p @typescript-eslint/parser@latest -p eslint-plugin-promise@latest -p eslint-plugin-unicorn@latest -p eslint-plugin-react@latest -p eslint-plugin-hooks@latest -p eslint-plugin-diff@latest eslint --cache --config ~/.eslintrc-personal-preference.js --ext .js,.ts,.tsx --resolve-plugins-relative-to "$GIT_ROOT_FOLDER" --fix; pnpm exec -- prettier --write . ;'
+# alias lintstaging='pnpm add @typescript-eslint/eslint-plugin@latest @typescript-eslint/parser@latest eslint-plugin-promise@latest eslint-plugin-unicorn@latest eslint-plugin-react@latest eslint-plugin-hooks@latest eslint-plugin-diff@latest ; export ESLINT_PLUGIN_DIFF_COMMIT="origin/staging" ; export ESLINT_SORT=true; export GIT_ROOT_FOLDER="$(git rev-parse --show-toplevel)"; git diff --diff-filter=ACM "$ESLINT_PLUGIN_DIFF_COMMIT" --name-only -z "*.tsx" "*.ts" "*.js" | xargs -0 pnpx eslint --config ~/.eslintrc-personal-preference.js --ext .js,.ts,.tsx --resolve-plugins-relative-to "$GIT_ROOT_FOLDER" --fix; pnpm exec -- prettier --write . ;'
+alias lintstaging='pnpm add @typescript-eslint/eslint-plugin@latest @typescript-eslint/parser@latest eslint-plugin-promise@latest eslint-plugin-unicorn@latest eslint-plugin-react@latest eslint-plugin-hooks@latest eslint-plugin-diff@latest ; export ESLINT_PLUGIN_DIFF_COMMIT="origin/staging" ; export ESLINT_SORT=true; export GIT_ROOT_FOLDER="$(git rev-parse --show-toplevel)"; git diff --diff-filter=ACM "$ESLINT_PLUGIN_DIFF_COMMIT" --name-only -z "*.tsx" "*.ts" "*.js" | xargs -0 pnpx eslint --config ~/.eslintrc-personal-preference.js --ext .js,.ts,.tsx --resolve-plugins-relative-to "$GIT_ROOT_FOLDER" --fix;'
+alias lintdevelop='nvm use 20; yarn add @typescript-eslint/eslint-plugin@latest @typescript-eslint/parser@latest eslint-plugin-promise@latest eslint-plugin-unicorn@latest eslint-plugin-react@latest eslint-plugin-hooks@latest eslint-plugin-diff@latest ; export ESLINT_PLUGIN_DIFF_COMMIT="origin/develop" ; export ESLINT_SORT=true; export GIT_ROOT_FOLDER="$(git rev-parse --show-toplevel)"; git diff --diff-filter=ACM "$ESLINT_PLUGIN_DIFF_COMMIT" --name-only -z "*.tsx" "*.ts" "*.js" | xargs -0 yarn exec eslint --config ~/.eslintrc-personal-preference.js --ext .js,.ts,.tsx --resolve-plugins-relative-to "$GIT_ROOT_FOLDER" --fix;'
+alias lint_all='export ESLINT_SORT=true; unset ESLINT_PLUGIN_DIFF_COMMIT; export GIT_ROOT_FOLDER="$(git rev-parse --show-toplevel)"; pnpx eslint --cache --config ~/.eslintrc-personal-preference.js --ext .js,.ts,.tsx --resolve-plugins-relative-to "$GIT_ROOT_FOLDER" --fix .; pnpm exec -- prettier --write . ;'
+alias format='export FORK_COMMIT="$(git merge-base origin/HEAD "HEAD^")"; git diff --diff-filter=ACM "$FORK_COMMIT" --name-only -z "*.tsx" "*.ts" "*.js" | xargs -0 pnpm exec prettier --write;'
+alias sortpackages='git ls-files ./\*package.json -z | xargs -0 pnpx sort-package-json'
+# alias review='yarn exec -- eslint --cache --config ~/.eslintrc-review.js --ext .js,.ts,.tsx --resolve-plugins-relative-to "$(git rev-parse --show-toplevel)"'
 alias peslintglobal='eslint --config ~/.eslintrc.js --ext .js,.ts,.tsx'
-alias pip=/usr/local/bin/pip3
+alias pip='"$(brew --prefix)"/bin/pip3'
 alias boc='(cd ~/dev/xxl-monorepo && wait-on http://localhost:3000 ; yarn workspace @xxl/backoffice cypress:open)'
 alias bocd='(cd ~/dev/xxl-monorepo && CYPRESS_BASE_URL=https://backoffice.dev.aws.xxl.se yarn workspace @xxl/backoffice cypress:open)'
 alias bod='(cd ~/dev/xxl-monorepo && yarn workspace @xxl/backoffice dev)'
@@ -28,3 +42,12 @@ alias rsd='(cd ~/dev/xxl-monorepo && yarn workspace @xxl/retailsolutions dev)'
 alias rsb='(cd ~/dev/xxl-monorepo && yarn workspace @xxl/retailsolutions build)'
 alias rss='(cd ~/dev/xxl-monorepo && yarn workspace @xxl/retailsolutions start)'
 alias rsst='(cd ~/dev/xxl-monorepo && yarn workspace @xxl/retailsolutions start-server-and-test start http://localhost:3000 cypress:open)'
+alias docker-login='source ~/.secrets; echo "$GITHUB_PAT" | docker login ghcr.io -u "$GITHUB_USERNAME" --password-stdin'
+alias update-backend='(cd ~/dev/capchap-dev-tools; npm stop || true; docker-login && docker compose pull && npm start)'
+alias master-to-staging='gh pr create --base staging --head master --reviewer capchapdev/capchap-dev --title "[$(date '+%Y-%m-%d')] Staging" --label "staging" --body ""'
+alias staging-to-production='gh pr create --base production --head staging --reviewer capchapdev/capchap-dev --title "[$(date '+%Y-%m-%d')] Production" --label "production" --body ""'
+# alias pmc="docker run registry.gitlab.com/chromaway/core-tools/management-console/pmc"
+alias files-with-many-imports="find src -type f \( -name '*.tsx' -not -name '*.test.tsx' -not -name '*.stories.tsx' \) -exec grep -H -c '^import' {} \; | awk -F: '{print \$2 \" \" \$1}' | sort -n -r -k1 | awk '{print \$2 \": \" \$1}' | head"
+alias commonly-changed-files='git log --name-only --pretty=format: "*.js" "*.ts" "*.tsx" | sort | uniq -c | sort -nr'
+alias quality_loc='git ls-files "*.ts" "*.tsx" -z | xargs -0 wc -l | sort -rn | more'
+alias quality_churn='git log --pretty=format: --name-only | sort | uniq -c | sort -rg | more'
