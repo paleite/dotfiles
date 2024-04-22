@@ -31,7 +31,8 @@ brew cleanup -s
 _title "brew doctor"
 # Brew doctor fails when it has a warning. Maybe better to run this as a separate task
 brew doctor || true
-sudo chown -R "$(whoami)" "$(brew --prefix)"/* # Fix /usr/local not being writable
+# Disabled because I have no askpass helper installed in cron
+# sudo chown -R "$(whoami)" "$(brew --prefix)"/* # Fix /usr/local not being writable
 
 # _title "brew prune"
 # brew prune # Warning: Calling 'brew prune' is deprecated! Use 'brew cleanup' instead.
@@ -45,6 +46,9 @@ _title "npm cache clean --force"
 
 _title "yarn cache clean"
 yarn cache clean
+
+_title "pnpm store prune"
+pnpm store prune
 
 _title "n prune"
 n prune

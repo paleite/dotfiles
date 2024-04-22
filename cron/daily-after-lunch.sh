@@ -15,9 +15,9 @@ source "${HOME}"/.functions
 
 set -o verbose
 
-_title "MacDown-Template"
-cd "${HOME}"/dev/MacDown-Template
-yarn run build
+# _title "MacDown-Template"
+# cd "${HOME}"/dev/MacDown-Template
+# yarn run build
 
 _exit_on_tethered
 
