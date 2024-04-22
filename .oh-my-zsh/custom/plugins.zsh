@@ -1,5 +1,5 @@
 # Load plugins
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh # THIS ONE HAS ISSUES
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
 
@@ -15,3 +15,4 @@ for plugin ($plugins); do
     echo "[oh-my-zsh] plugin '$plugin' not found"
   fi
 done
+

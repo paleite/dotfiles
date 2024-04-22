@@ -1,6 +1,7 @@
 # Init
-source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
-source "${HOME}"/.p10k.zsh
+# source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+# source "${HOME}"/.p10k.zsh
 
 # Left and right prompt elements
 POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind git-remotebranch git-tagname)
