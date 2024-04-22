@@ -1,5 +1,5 @@
-# Set default editor to joe
-export EDITOR="code --wait"
+# Set default editor to call dotfiles/editor.sh
+export EDITOR="~/dotfiles/editor.sh"
 
 # Turn on colors
 export CLICOLOR=1
