@@ -159,6 +159,8 @@ brew "imagemagick"
 brew "jadx"
 # Full featured terminal-based screen editor
 brew "joe"
+# Utility to optimize JPEG files
+brew "jpegoptim"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Text-based web browser
@@ -392,6 +394,8 @@ cask "vlc"
 cask "webpquicklook"
 # Native desktop client for WhatsApp
 cask "whatsapp"
+# Multiplayer code editor
+cask "zed"
 # Desktop client for the Zulip team chat platform
 cask "zulip"
 mas "DM1", id: 522349879
@@ -542,6 +546,7 @@ vscode "pkief.material-icon-theme"
 vscode "planbcoding.vscode-react-refactor"
 vscode "pmneo.tsimporter"
 vscode "pnp.polacode"
+vscode "pomdtr.excalidraw-editor"
 vscode "ponicode.ponicode"
 vscode "quick-lint.quick-lint-js"
 vscode "quicktype.quicktype"

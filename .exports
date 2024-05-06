@@ -1,5 +1,5 @@
 # Set default editor to call dotfiles/editor.sh
-export EDITOR="~/dotfiles/editor.sh"
+export EDITOR="${HOME}/dotfiles/editor.sh"
 
 # Turn on colors
 export CLICOLOR=1
