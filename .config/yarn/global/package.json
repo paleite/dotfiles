@@ -21,7 +21,7 @@
     "create-vite": "^4.1.0",
     "cspell": "^6.29.0",
     "deps-report": "^0.5.0",
-    "eslint": "^8.36.0",
+    "eslint": "^9.26.0",
     "eslint-find-rules": "^4.1.0",
     "eslint-nibble": "^8.1.0",
     "eslint-plugin-dollar-sign": "^1.0.2",
