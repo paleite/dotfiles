@@ -40,7 +40,7 @@
     "lerna": "^6.5.1",
     "lighthouse": "^10.0.2",
     "lint-staged": "^13.2.0",
-    "minimatch": ">=10.2.1",
+    "minimatch": ">=10.2.3",
     "node-notifier-cli": "^2.0.0",
     "nodemon": "^2.0.21",
     "np": "^7.6.3",
